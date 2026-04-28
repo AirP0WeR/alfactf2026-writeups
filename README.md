@@ -48,7 +48,7 @@
 <td><a href="newjacket/"><strong>newjacket</strong></a><br><small>Новая куртка</small></td>
 
 <td>🟢 Лёгкая</td>
-<td>Эскалация привилегий в Docker</td>
+<td>Bash 2FA bypass через Ctrl+X Ctrl+E (vim shell escape)</td>
 </tr>
 
 <tr>
@@ -57,7 +57,7 @@
 <td><a href="carbon/"><strong>carbon</strong></a><br><small>Углеродный след</small></td>
 
 <td>🟡 Средняя</td>
-<td>ELF эксплуатация + ROP цепочка</td>
+<td>TUI-бинарь: OOB write через cursor underflow + bypass логина</td>
 </tr>
 
 <tr>
@@ -66,7 +66,7 @@
 <td><a href="backpack/"><strong>backpack</strong></a><br><small>Диджитал-рюкзак</small></td>
 
 <td>🟡 Средняя</td>
-<td>Криптоанализ RSA</td>
+<td>AES-CBC PKCS#7 padding oracle</td>
 </tr>
 
 <tr>
@@ -75,7 +75,7 @@
 <td><a href="provision/"><strong>provision</strong></a><br><small>Учёт провизии</small></td>
 
 <td>🟡 Средняя</td>
-<td>Реверс Java байт-кода</td>
+<td>Реверс Google Sheets: линейная алгебра mod 251 + битмап</td>
 </tr>
 
 <tr>
@@ -84,7 +84,7 @@
 <td><a href="peakmood/"><strong>peakmood</strong></a><br><small>PeakMood</small></td>
 
 <td>🟡 Средняя</td>
-<td>Анализ Android APK + Frida</td>
+<td>Android APK reverse + sign confusion в проверке высоты</td>
 </tr>
 
 <tr>
@@ -120,7 +120,7 @@
 <td><a href="pokoy/"><strong>pokoy</strong></a><br><small>Покой</small></td>
 
 <td>🔴 Сложная</td>
-<td>Реверс FPGA Verilog netlist</td>
+<td>White-box AES в FPGA Verilog netlist</td>
 </tr>
 
 <tr>
@@ -129,7 +129,7 @@
 <td><a href="padel/"><strong>padel</strong></a><br><small>Главный падла</small></td>
 
 <td>🟡 Средняя</td>
-<td>Подмена сообщений WebSocket</td>
+<td>WebSocket spread-deserialize → host hijack</td>
 </tr>
 
 <tr>
@@ -138,7 +138,7 @@
 <td><a href="plusviber/"><strong>plusviber</strong></a><br><small>Плюсвайбер</small></td>
 
 <td>🟡 Средняя</td>
-<td>GraphQL + IDOR</td>
+<td>REST IDOR + утечка admin-secret</td>
 </tr>
 
 <tr>
