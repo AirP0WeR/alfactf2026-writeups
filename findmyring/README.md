@@ -7,7 +7,7 @@
 - **Исходная страница:** https://alfactf.ru/tasks/findmyring
 - **Статус:** solved ✅
 - **Решатель:** aip0wer
-- **Флаг:** `alfa{REDACTED-UNTIL-21:00}`
+- **Флаг:** `alfa{wIsh_I_hAd_TH4t_anT3NNA_FOR_MY_7V_rEM07E}`
 
 ## Условие
 

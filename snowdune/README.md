@@ -28,7 +28,7 @@
 - **URL:** https://snowdune-oae8t01y.alfactf.ru/
 - **Solver:** aip0wer
 - **Статус:** solved
-- **Флаг:** `alfa{REDACTED-UNTIL-21:00}`
+- **Флаг:** `alfa{5Oy_Boi1i_5TR1ketHROugh_dunE}`
 
 ### Наблюдения
 
