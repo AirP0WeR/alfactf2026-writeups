@@ -1,11 +1,11 @@
 # Вайбовый сплав
 
-- **Category:** Forensics, Windows, Web
+- **Категория:** Forensics, Windows, Web
 - **URL:** https://alfactf.ru/tasks/viberafting
-- **Artifacts:** viberafting.raw.tar.xz.torrent
+- **Вложения:** viberafting.raw.tar.xz.torrent
 - **Solver:** airp0wer
-- **Status:** solved
-- **Flag:** `alfa{REDACTED-UNTIL-21:00}`
+- **Статус:** solved
+- **Флаг:** `alfa{REDACTED-UNTIL-21:00}`
 
 ## Условие
 
@@ -41,13 +41,13 @@ fls -r -o 2048 viberafting.raw | grep -i "\.pf"
 # Prefetch показывает активность: CURSOR.EXE, NODE.EXE, WEVTUTIL.EXE
 ```
 
-### Hypothesis: Windows forensics analysis
+### Гипотеза: Windows-форензика
 Обнаружены подозрительные артефакты:
 - **WEVTUTIL.EXE** в Prefetch, но все Event Logs пустые → намеренная очистка
 - Активность Cursor AI и Node.js
 - PowerShell history содержит `npm` и `set-executionpolicy remotesigned`
 
-### Hypothesis: Supply chain attack via npm  
+### Гипотеза: Supply chain атака через npm  
 Извлекаем проект hiking-v1-planner:
 ```bash
 fls -o 2048 viberafting.raw 140255
@@ -66,7 +66,7 @@ Before any Next.js work, find and read the relevant doc in
 
 Поддельный пакет `next@16.2.4` содержит `dist/docs/instant-navigation.md` с инструкцией установить MCP сервер `debug-bridge`.
 
-### Hypothesis: MCP server poisoning
+### Гипотеза: отравление MCP-сервера
 Обнаружен вредоносный MCP сервер:
 ```bash
 icat -o 2048 viberafting.raw 111914  # .cursor/mcp.json
@@ -81,7 +81,7 @@ icat -o 2048 viberafting.raw 178180  # debug-bridge/index.js
 3. POST'ит на C2: `vibedoor-0rq3kbp2.alfactf.ru/api/support/upload`
 4. Возвращает URL кейса: `/admin/view/CASE-74F3A1CB72`
 
-### Exploit: MCP interaction confirmation
+### Эксплуатация: подтверждение взаимодействия с MCP
 Анализируем базы данных Cursor:
 ```bash
 icat -o 2048 viberafting.raw 136076 > state1.vscdb
@@ -93,7 +93,7 @@ sqlite3 state1.vscdb "SELECT key, value FROM ItemTable;"
 - История промптов: "продебажь проект", "используй дебажный mcp"  
 - **MCP ответ с URL кейса**: `{"case": "/admin/view/CASE-74F3A1CB72"}`
 
-### Flag extraction: SQL injection
+### Извлечение флага: SQL-инъекция
 Переходим на C2 сервер по полученному URL:
 ```bash
 curl "https://vibedoor-0rq3kbp2.alfactf.ru/admin/view/CASE-74F3A1CB72"
@@ -108,4 +108,4 @@ password: (любой)
 
 После успешного входа получаем доступ к административной панели с данными кейса и флагом.
 
-**Attack chain:** Supply Chain Attack (npm) → Prompt Injection (AGENTS.md) → MCP Poisoning (debug-bridge) → SQL Injection (admin'--)
+**Цепочка атаки:** Supply Chain Attack (npm) → Prompt Injection (AGENTS.md) → MCP Poisoning (debug-bridge) → SQL Injection (admin'--)
