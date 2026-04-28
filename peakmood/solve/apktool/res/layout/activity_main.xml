@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="@drawable/bg_world_gradient" android:layout_width="match_parent" android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/roamScreen" android:layout_width="match_parent" android:layout_height="match_parent">
+        <io.peakmood.mobile.WorldMapView android:id="@id/roamMapView" android:layout_width="match_parent" android:layout_height="match_parent" />
+        <View android:background="@drawable/bg_roam_scrim" android:layout_width="match_parent" android:layout_height="match_parent" />
+        <LinearLayout android:orientation="vertical" android:paddingLeft="22.0dp" android:paddingTop="22.0dp" android:paddingRight="22.0dp" android:paddingBottom="20.0dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <TextView android:textSize="30.0sp" android:textStyle="bold" android:textColor="@android:color/white" android:id="@id/brandText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/brand_name" android:shadowColor="#c0000000" android:shadowDx="0.0" android:shadowDy="2.0" android:shadowRadius="10.0" android:letterSpacing="0.16" />
+                    <TextView android:textSize="14.0sp" android:textColor="@color/ink" android:id="@id/roamSubtitleText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dp" android:text="@string/subtitle_world" android:shadowColor="#a0000000" android:shadowDx="0.0" android:shadowDy="2.0" android:shadowRadius="8.0" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="34.0dp">
+                <TextView android:textSize="34.0sp" android:textStyle="bold" android:textColor="@android:color/white" android:id="@id/roamStatusText" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxWidth="980.0dp" android:text="@string/status_idle" android:shadowColor="#c0000000" android:shadowDx="0.0" android:shadowDy="3.0" android:shadowRadius="12.0" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/ink" android:id="@id/roamCoordsText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dp" android:maxWidth="1040.0dp" android:text="@string/coords_idle" android:shadowColor="#a0000000" android:shadowDx="0.0" android:shadowDy="2.0" android:shadowRadius="8.0" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/ink" android:id="@id/roamDetailsText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="7.0dp" android:maxWidth="940.0dp" android:text="@string/details_world_idle" android:shadowColor="#a0000000" android:shadowDx="0.0" android:shadowDy="2.0" android:shadowRadius="8.0" />
+            </LinearLayout>
+            <Space android:layout_width="1.0dp" android:layout_height="0.0dp" android:layout_weight="1.0" />
+            <LinearLayout android:orientation="vertical" android:background="@drawable/bg_glass_panel" android:paddingLeft="18.0dp" android:paddingTop="16.0dp" android:paddingRight="18.0dp" android:paddingBottom="18.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="11.0sp" android:textStyle="bold" android:textColor="@color/ink" android:id="@id/roamMapMetaText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/map_meta_idle" android:shadowColor="#90000000" android:shadowDx="0.0" android:shadowDy="1.0" android:shadowRadius="6.0" />
+                <Button android:textColor="@android:color/white" android:id="@id/resumeEncounterButton" android:background="@drawable/bg_button_primary" android:visibility="gone" android:layout_width="match_parent" android:layout_height="50.0dp" android:layout_marginTop="12.0dp" android:text="@string/button_resume_encounter" android:textAllCaps="false" />
+                <TextView android:textSize="15.0sp" android:textStyle="bold" android:textColor="@android:color/white" android:id="@id/roamLootTitleText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dp" android:text="@string/loot_title" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/ink" android:id="@id/roamLootText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="7.0dp" android:text="@string/loot_empty" android:shadowColor="#90000000" android:shadowDx="0.0" android:shadowDy="1.0" android:shadowRadius="6.0" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout android:id="@id/encounterScreen" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+        <io.peakmood.mobile.CameraPreviewView android:id="@id/cameraPreviewView" android:layout_width="match_parent" android:layout_height="match_parent" />
+        <View android:background="@drawable/bg_scene_scrim" android:layout_width="match_parent" android:layout_height="match_parent" />
+        <LinearLayout android:orientation="vertical" android:paddingLeft="20.0dp" android:paddingTop="22.0dp" android:paddingRight="20.0dp" android:paddingBottom="20.0dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="vertical" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <TextView android:textSize="28.0sp" android:textStyle="bold" android:textColor="@android:color/white" android:id="@id/encounterBrandText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/brand_name" android:shadowColor="#c0000000" android:shadowDx="0.0" android:shadowDy="2.0" android:shadowRadius="10.0" android:letterSpacing="0.16" />
+                    <TextView android:textSize="14.0sp" android:textColor="@color/ink" android:id="@id/encounterSubtitleText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dp" android:text="@string/subtitle_encounter" android:shadowColor="#a0000000" android:shadowDx="0.0" android:shadowDy="2.0" android:shadowRadius="8.0" />
+                </LinearLayout>
+                <Button android:textColor="@android:color/white" android:id="@id/leaveEncounterButton" android:background="@drawable/bg_button_secondary" android:layout_width="wrap_content" android:layout_height="44.0dp" android:text="@string/button_leave_encounter" android:textAllCaps="false" />
+            </LinearLayout>
+            <FrameLayout android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
+                <LinearLayout android:layout_gravity="end|top" android:orientation="vertical" android:background="@drawable/bg_map_panel" android:padding="12.0dp" android:layout_width="178.0dp" android:layout_height="208.0dp" android:layout_marginTop="18.0dp">
+                    <TextView android:textSize="11.0sp" android:textStyle="bold" android:textColor="@color/ink" android:id="@id/encounterMapLabelText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/map_label" android:shadowColor="#90000000" android:shadowDx="0.0" android:shadowDy="1.0" android:shadowRadius="6.0" />
+                    <io.peakmood.mobile.WorldMapView android:id="@id/encounterMapView" android:layout_width="match_parent" android:layout_height="156.0dp" android:layout_marginTop="10.0dp" />
+                </LinearLayout>
+                <io.peakmood.mobile.MiningSceneView android:id="@id/miningSceneView" android:layout_width="match_parent" android:layout_height="match_parent" />
+                <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="@android:color/white" android:layout_gravity="center|bottom" android:id="@id/nodeTitleText" android:background="@drawable/bg_chip" android:paddingLeft="14.0dp" android:paddingTop="8.0dp" android:paddingRight="14.0dp" android:paddingBottom="8.0dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="112.0dp" android:text="@string/node_idle" android:shadowColor="#b0000000" android:shadowDx="0.0" android:shadowDy="2.0" android:shadowRadius="8.0" />
+            </FrameLayout>
+            <LinearLayout android:orientation="vertical" android:background="@drawable/bg_glass_panel" android:paddingLeft="18.0dp" android:paddingTop="16.0dp" android:paddingRight="18.0dp" android:paddingBottom="18.0dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="28.0sp" android:textStyle="bold" android:textColor="@android:color/white" android:id="@id/encounterStatusText" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/encounter_idle_status" android:shadowColor="#a0000000" android:shadowDx="0.0" android:shadowDy="2.0" android:shadowRadius="8.0" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/ink" android:id="@id/encounterDetailsText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6.0dp" android:text="@string/encounter_idle_details" android:shadowColor="#90000000" android:shadowDx="0.0" android:shadowDy="1.0" android:shadowRadius="6.0" />
+                <ProgressBar android:id="@id/nodeProgress" android:layout_width="match_parent" android:layout_height="10.0dp" android:layout_marginTop="16.0dp" android:max="5" android:progress="0" android:progressTint="@color/glow" android:progressBackgroundTint="@color/glass_line" android:secondaryProgressTint="@color/glow" style="?android:attr/progressBarStyleHorizontal" />
+                <TextView android:textSize="15.0sp" android:textStyle="bold" android:textColor="@android:color/white" android:id="@id/encounterLootTitleText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14.0dp" android:text="@string/loot_title" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/ink" android:id="@id/encounterLootText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dp" android:text="@string/loot_empty" android:shadowColor="#90000000" android:shadowDx="0.0" android:shadowDy="1.0" android:shadowRadius="6.0" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,11 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+<<<<<<< HEAD
+    <property name="random_seed" value="1777115013" />
+    <testcase name="probe" classname="probe3" file="/Users/airp0wer/Projects/alfa-ctf-2026/tasks-2026/pokoy/solve/probe3.py" lineno="65" time="4.071316957473755" sim_time_ns="1697640.0" ratio_time="416975.64147729304" />
+=======
+    <property name="random_seed" value="1777111927" />
+    <testcase name="peace" classname="probe" file="/Users/cyanogen/Documents/ctf/alfa-ctf-2026/tasks-2026/pokoy/solve/probe.py" lineno="74" time="0.12023091316223145" sim_time_ns="23478.0" ratio_time="195274.23840090426" />
+>>>>>>> 0f878a3 (tasks)
+  </testsuite>
+</testsuites>

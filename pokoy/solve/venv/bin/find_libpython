@@ -1,0 +1,7 @@
+#!/Users/airp0wer/Projects/alfa-ctf-2026/tasks-2026/pokoy/solve/venv/bin/python3.12
+import sys
+from find_libpython import main
+if __name__ == '__main__':
+    if sys.argv[0].endswith('.exe'):
+        sys.argv[0] = sys.argv[0][:-4]
+    sys.exit(main())

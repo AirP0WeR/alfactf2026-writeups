@@ -1,0 +1,15 @@
+version: 3.0.2
+apkFileName: PeakMood.apk
+usesFramework:
+  ids:
+  - 1
+sdkInfo:
+  minSdkVersion: 26
+  targetSdkVersion: 36
+resourcesInfo:
+  packageId: 127
+  keepRawValues: true
+doNotCompress:
+- arsc
+- jpg
+- png

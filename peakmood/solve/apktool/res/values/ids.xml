@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <id name="roamScreen" />
+    <id name="roamMapView" />
+    <id name="brandText" />
+    <id name="roamSubtitleText" />
+    <id name="roamStatusText" />
+    <id name="roamCoordsText" />
+    <id name="roamDetailsText" />
+    <id name="roamMapMetaText" />
+    <id name="resumeEncounterButton" />
+    <id name="roamLootTitleText" />
+    <id name="roamLootText" />
+    <id name="encounterScreen" />
+    <id name="cameraPreviewView" />
+    <id name="encounterBrandText" />
+    <id name="encounterSubtitleText" />
+    <id name="leaveEncounterButton" />
+    <id name="encounterMapLabelText" />
+    <id name="encounterMapView" />
+    <id name="miningSceneView" />
+    <id name="nodeTitleText" />
+    <id name="encounterStatusText" />
+    <id name="encounterDetailsText" />
+    <id name="nodeProgress" />
+    <id name="encounterLootTitleText" />
+    <id name="encounterLootText" />
+</resources>

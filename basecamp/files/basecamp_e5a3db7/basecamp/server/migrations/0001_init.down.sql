@@ -1,0 +1,4 @@
+DROP INDEX IF EXISTS idx_lessons_course_id;
+DROP TABLE IF EXISTS lessons;
+DROP TABLE IF EXISTS courses;
+DROP TABLE IF EXISTS users;

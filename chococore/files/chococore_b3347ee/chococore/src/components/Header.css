@@ -1,0 +1,33 @@
+.header-logo {
+  text-decoration: none;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: opacity 0.2s ease;
+}
+
+.header-logo:hover {
+  opacity: 0.85;
+}
+
+.header-logo-icon {
+  flex-shrink: 0;
+}
+
+.header-logo-text {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--primary);
+}
+
+.header-nav a.active {
+  font-weight: 700;
+  color: var(--primary);
+  background: rgba(201, 169, 97, 0.1);
+}
+
+.header-nav a {
+  font-weight: 600;
+}

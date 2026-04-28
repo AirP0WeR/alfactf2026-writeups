@@ -1,0 +1,122 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android)
+SHA-256-Digest-Manifest: MmDYfoG2zWbxYbyCcfLdF0HzyvVwvvCjAi8zRXVGU+Y=
+X-Android-APK-Signed: 2, 3
+
+Name: AndroidManifest.xml
+SHA-256-Digest: KcLT2+A2LDbgYTwHTctdBY+cCOiVPYnJGNmDNt1nxvA=
+
+Name: classes.dex
+SHA-256-Digest: xT5XIvPnpCqaSlZo6EhaRi0GaqKKBd5dlfbL92xxEQQ=
+
+Name: res/drawable-nodpi-v4/ar_geode_00.png
+SHA-256-Digest: fQMLyF76dex4GhyCyEyxWIAYddXnid/YLImUe0REdDY=
+
+Name: res/drawable-nodpi-v4/ar_geode_01.png
+SHA-256-Digest: C99rK/P7pXH2+0m+xwN4U1IgcxkTMFclmZb3L6oRM3s=
+
+Name: res/drawable-nodpi-v4/ar_geode_02.png
+SHA-256-Digest: i681wKVq/yRoPr8JrT4w+Z3L/UVrWmhEpTKeKTbS2Y0=
+
+Name: res/drawable-nodpi-v4/ar_geode_03.png
+SHA-256-Digest: 6xJJKfpJNcXc7wQ1UM4j5CZ/lrKLiU6Vh2ip/YjgZV8=
+
+Name: res/drawable-nodpi-v4/ar_geode_04.png
+SHA-256-Digest: NZq6vBZvSBlgZ/gMQ9gSZ6ICRJetGCXsdj2UGMH5wRI=
+
+Name: res/drawable-nodpi-v4/ar_geode_05.png
+SHA-256-Digest: 275TNJNwwY114yBXwUwYudJuhWThFy2tesmGHaYEKCU=
+
+Name: res/drawable-nodpi-v4/ar_geode_06.png
+SHA-256-Digest: XJi33qigaTTca4SqPzqnNSMaq6x6Y8FHJQcDdIbBMsA=
+
+Name: res/drawable-nodpi-v4/ar_geode_07.png
+SHA-256-Digest: QJVr4YSq4k8W5WOPNYnZGdlihKsjZcf0Fer8N0UnRkI=
+
+Name: res/drawable-nodpi-v4/ar_geode_08.png
+SHA-256-Digest: +yDTUP6RTfmO70sacWwHau8x4Qvd89P5bkkKPh4ZerI=
+
+Name: res/drawable-nodpi-v4/ar_geode_09.png
+SHA-256-Digest: rR1OEerLpPk72/5Uq+ChtPnhC0/lsCDQv0sclLff8M4=
+
+Name: res/drawable-nodpi-v4/ar_geode_10.png
+SHA-256-Digest: JbskyqN83SHdxO5to8EKvp7B/dwWv6yy2KosFE+N/Kk=
+
+Name: res/drawable-nodpi-v4/ar_geode_11.png
+SHA-256-Digest: /lmLaznCSpAs27LSJ7ziJ92PwA+zYnx4CxwpsJh9GA0=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_0.png
+SHA-256-Digest: VxvEBMmxiFSmt0ie4YXFUuKDpxaJAm/CZZxSPQ+ncfc=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_1.png
+SHA-256-Digest: 0I88JZkKKMrfseldEDNSssjT63NLoKYnGCuVLOjNZBY=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_2.png
+SHA-256-Digest: q2IyYL+FMl1JqBMT0tKFqgEc7xpkqt9f7/O3SFVqKFA=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_3.png
+SHA-256-Digest: xbuc9txGNymfK+PUexUA6IxkuuSLqTcBAQPKF0bW55Q=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_4.png
+SHA-256-Digest: 2YO55yyUv7UGwF5WXD9Ji10knUBUqNhcte8zPk7Ln4o=
+
+Name: res/drawable-nodpi-v4/ar_hammer.png
+SHA-256-Digest: bhi9cJoF3RfBWM15dhhgOBIBQln4VIVGgNNDDhR6LdY=
+
+Name: res/drawable/bg_button_primary.xml
+SHA-256-Digest: 6GuvjdE6YPUMUuPXN3KKWvcCKkKPB5yqvGPig7QKnO0=
+
+Name: res/drawable/bg_button_secondary.xml
+SHA-256-Digest: +/zCMLwmCQiv2oVsCYUW22TrwHSAHfT+RHQrlGikLW4=
+
+Name: res/drawable/bg_chip.xml
+SHA-256-Digest: 07mgowhuPdZlAX+XfTgAkKQVSiK8+GmINBrAVZ/wwwo=
+
+Name: res/drawable/bg_glass_panel.xml
+SHA-256-Digest: LmLjBBoJoY/hfenUJIDmhj4WZFcAdabF67pdwdSgjX8=
+
+Name: res/drawable/bg_map_panel.xml
+SHA-256-Digest: ulQSAs9W1m+ZEgjFc30sUOR5Iwyn0mFP+bL4eKiuOiQ=
+
+Name: res/drawable/bg_reticle.xml
+SHA-256-Digest: UzpzBcoWi2rrAiJK5XtwrbxoaKS8N0Z0KAowQckSa4Y=
+
+Name: res/drawable/bg_roam_scrim.xml
+SHA-256-Digest: nEGuf5jv6QArKetC2NXMCiD/lXdT+p0foXOoveFiRvU=
+
+Name: res/drawable/bg_scene_scrim.xml
+SHA-256-Digest: +RDlnHsjzDPDlS+3sR/rc25FX3IaqbyMrvQE+MUWOUA=
+
+Name: res/drawable/bg_world_gradient.xml
+SHA-256-Digest: Qc3urowr23BpoaWtmmmEWkcnqV0kqi4CIznRoUQPCGo=
+
+Name: res/drawable/ic_peakmood.xml
+SHA-256-Digest: ARsRF6WMPoL0o998+ALM5FFSmKAIbYOETKE1EkPDHBA=
+
+Name: res/drawable/ore_common.xml
+SHA-256-Digest: Voc6ueNxSCiSHPFbAolhLr/jOnCG+N62FSck9LlRAV4=
+
+Name: res/drawable/ore_epic.xml
+SHA-256-Digest: 5uWqqlFld6SSWBlQoMDPJpGb5uUN/PRIxaf0PpI8SDc=
+
+Name: res/drawable/ore_idle.xml
+SHA-256-Digest: 5eo27imyI9NGabRIEGNsOICgSjWRyvXpPqhAa3EtJ38=
+
+Name: res/drawable/ore_mythic.xml
+SHA-256-Digest: X+NAfA+boJeVW4sXVueDwmSaJU1EJJN22t2Wgmu11cg=
+
+Name: res/drawable/ore_rare.xml
+SHA-256-Digest: l1Ha0PWl9g7Inl36HBf9saYhmzvQHvWboJqsILvCtJs=
+
+Name: res/layout/activity_main.xml
+SHA-256-Digest: z6e+LRKbdcyOmPkov+zSwzdteHXjWTowS+b4lX43Vnc=
+
+Name: res/raw/global_relief.jpg
+SHA-256-Digest: 6E0MdH9RWN0CrY5L1aYQ6URw5dbnWXgRWENJflfIeaE=
+
+Name: res/raw/terrain_anchors.csv
+SHA-256-Digest: j41nrZsAGGbHGKxYhVREQRpt2UiZXnoIbRPrLuigMOE=
+
+Name: resources.arsc
+SHA-256-Digest: a5i4HVUyZxYjxeYajVPtuouKeiIFtjdk1a2sLc2MSHE=
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="surface">#eef2ec</color>
+    <color name="surface_alt">#dde6de</color>
+    <color name="ink">#e9f1ee</color>
+    <color name="muted">#9db0aa</color>
+    <color name="mist">#c8d7d2</color>
+    <color name="glow">#9ef2de</color>
+    <color name="night_0">#071015</color>
+    <color name="night_1">#0f1e26</color>
+    <color name="night_2">#18313b</color>
+    <color name="glass_fill">#4010181e</color>
+    <color name="glass_fill_soft">#2d0c1419</color>
+    <color name="glass_line">#5a94b6af</color>
+    <color name="map_fill">#102028</color>
+    <color name="map_line">#437c918e</color>
+    <color name="map_path">#5eb7aa8a</color>
+    <color name="map_player">#f4faf8</color>
+    <color name="map_node_common">#6bd8c6</color>
+    <color name="map_node_rare">#7db0ff</color>
+    <color name="map_node_epic">#ffb766</color>
+    <color name="map_node_mythic">#ff7363</color>
+    <color name="accent">#169a78</color>
+    <color name="accent_deep">#0d735a</color>
+    <color name="line">#2f1f343c</color>
+    <color name="ore_idle_fill">#f8edde</color>
+    <color name="ore_common_fill">#e2f0e6</color>
+    <color name="ore_rare_fill">#dceaf4</color>
+    <color name="ore_epic_fill">#f5e5cf</color>
+    <color name="ore_mythic_fill">#f3d8cc</color>
+    <color name="ore_common_stroke">#169a78</color>
+    <color name="ore_rare_stroke">#2d82c7</color>
+    <color name="ore_epic_stroke">#c57b22</color>
+    <color name="ore_mythic_stroke">#c25537</color>
+</resources>

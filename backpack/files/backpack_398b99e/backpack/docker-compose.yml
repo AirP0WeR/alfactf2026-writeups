@@ -1,0 +1,8 @@
+services:
+  backpack:
+    build: ./src/
+    ports:
+      - "30034:30034"
+    restart: unless-stopped
+    stop_grace_period: 0s
+

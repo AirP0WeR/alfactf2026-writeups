@@ -1,0 +1,9 @@
+# Temporary files
+*.pyc
+__pycache__/
+.DS_Store
+
+# Private data that shouldn't be in public repo
+*.local
+cookies.txt
+credentials/

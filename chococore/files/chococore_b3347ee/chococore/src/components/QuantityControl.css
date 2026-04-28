@@ -1,0 +1,52 @@
+.quantity-control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  border-radius: 10px;
+}
+
+.quantity-control-btn.quantity-control-btn-simple {
+  padding: 14px 28px;
+  justify-content: center;
+}
+
+.quantity-control-btn.quantity-control-btn-simple:disabled {
+  background: #d4b870;
+}
+
+.quantity-control-btn button {
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: inherit;
+  font: inherit;
+  transition: all 0.2s ease;
+  padding: 14px 24px;
+  font-weight: 700;
+}
+
+.quantity-control-btn .qty {
+  min-width: 20px;
+  box-sizing: content-box;
+  text-align: center;
+}
+
+.qty-spinner {
+  display: inline-flex;
+}
+
+.quantity-control-btn button:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.quantity-control-btn .qty-value {
+  flex: 1;
+  text-align: center;
+  font-weight: 700;
+  color: #000000;
+  padding: 0 8px;
+  font-size: 16px;
+}

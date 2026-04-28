@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Падел — Вход</title>
+  <link rel="stylesheet" href="/client/css/style.css">
+</head>
+<body>
+  <div id="auth-screen">
+    <h1>ПАДЕЛ</h1>
+    <div id="auth-card">
+      <div id="auth-tabs">
+        <button id="auth-tab-login" class="auth-tab active">Вход</button>
+        <button id="auth-tab-register" class="auth-tab">Регистрация</button>
+      </div>
+
+      <form id="auth-form" autocomplete="off">
+        <label>Имя пользователя
+          <input type="text" id="auth-username" minlength="9" maxlength="32" autocomplete="username" required>
+        </label>
+        <label>Пароль
+          <input type="password" id="auth-password" minlength="9" autocomplete="current-password" required>
+        </label>
+        <button type="submit" id="auth-submit">Войти</button>
+        <div id="auth-error"></div>
+      </form>
+
+      <div id="auth-help">
+        Зарегистрируйтесь, чтобы создавать и присоединяться к комнатам.
+      </div>
+    </div>
+  </div>
+
+  <script src="/client/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+.checkout-title {
+  margin-bottom: 28px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.order-summary-title {
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.cart-item-total {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text-primary);
+}
+
+.insufficient-funds {
+  margin-top: 18px;
+}
+
+.insufficient-funds .error-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--primary);
+  transition: opacity 0.2s ease;
+}
+
+.insufficient-funds .error-link:hover {
+  opacity: 0.8;
+}
+
+.checkout-button {
+  margin-top: 24px;
+}

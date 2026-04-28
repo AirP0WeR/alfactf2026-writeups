@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Падел — Мультиплеер</title>
+  <link rel="stylesheet" href="/client/css/style.css?v=2">
+</head>
+<body>
+  <div id="app">
+    <div id="lobby" class="screen">
+      <div id="lobby-topbar">
+        <span id="lobby-username"></span>
+        <button id="btn-logout">Выйти</button>
+      </div>
+      <h1>ПАДЕЛ</h1>
+      <div class="lobby-content">
+        <button id="btn-local" class="btn-primary">Играть против бота</button>
+        <button id="btn-rules" class="btn-rules">Как играть</button>
+        <div class="divider"><span>или играть онлайн</span></div>
+        <div id="room-actions">
+          <button id="btn-create">Создать комнату</button>
+          <button id="btn-quick-join">Быстрый вход</button>
+        </div>
+
+        <div id="official-list">
+          <div id="official-list-header">
+            <span>Официальные игры</span>
+          </div>
+          <div id="official-list-body">
+            <div class="room-list-empty">Загрузка...</div>
+          </div>
+        </div>
+
+        <div id="room-list">
+          <div id="room-list-header">
+            <span>Пользовательские игры</span>
+            <button id="btn-refresh" title="Обновить">&#x21bb;</button>
+          </div>
+          <div id="room-list-body">
+            <div class="room-list-empty">Нет доступных игр. Создайте свою!</div>
+          </div>
+        </div>
+
+        <div id="create-room-dialog" class="hidden">
+          <h3>Создать комнату</h3>
+          <label>Название комнаты
+            <input type="text" id="room-name-input" placeholder="Мой матч" maxlength="24" />
+          </label>
+          <label>Игроки
+            <select id="room-max-players">
+              <option value="2">2 (1 на 1)</option>
+              <option value="4" selected>4 (2 на 2)</option>
+            </select>
+          </label>
+          <label>Геймов в сете
+            <select id="room-games-per-set">
+              <option value="2">2</option>
+              <option value="4">4</option>
+              <option value="6" selected>6</option>
+            </select>
+          </label>
+          <label>Сетов до победы
+            <select id="room-sets-to-win">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+            </select>
+          </label>
+          <label>Пароль (необязательно)
+            <input type="text" id="room-password-input" placeholder="" maxlength="20" autocomplete="off" />
+          </label>
+          <div class="dialog-buttons">
+            <button id="btn-create-confirm">Создать</button>
+            <button id="btn-create-cancel" class="btn-secondary">Отмена</button>
+          </div>
+        </div>
+
+        <div id="room-view" class="hidden">
+          <h2>Комната: <span id="room-id"></span></h2>
+          <div id="room-config-info"></div>
+          <div id="player-slots"></div>
+          <button id="btn-ready">Готов</button>
+          <button id="btn-leave-room">Покинуть комнату</button>
+          <div id="room-status"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="admin-panel" class="hidden">
+      <h3>Панель администратора</h3>
+      <div id="admin-lobby-controls">
+        <div class="admin-row">
+          <label>Название
+            <input type="text" id="admin-room-name" maxlength="24" readonly>
+          </label>
+        </div>
+        <div class="admin-row">
+          <label>Игроков
+            <select id="admin-max-players">
+              <option value="2">2</option>
+              <option value="4">4</option>
+            </select>
+          </label>
+          <label>Геймов
+            <select id="admin-games-per-set">
+              <option value="1">1</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="6">6</option>
+              <option value="9">9</option>
+            </select>
+          </label>
+          <label>Сетов
+            <select id="admin-sets-to-win">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </label>
+        </div>
+        <div class="admin-button-row">
+          <button id="btn-admin-save">Сохранить</button>
+          <button id="btn-admin-start" class="hidden">Начать</button>
+          <button id="btn-admin-close-room">Удалить комнату</button>
+        </div>
+      </div>
+      <div id="admin-ingame-players"></div>
+      <div id="admin-status"></div>
+    </div>
+
+    <div id="notice-overlay" class="hidden">
+      <div id="notice-popup">
+        <div id="notice-title">Уведомление</div>
+        <div id="notice-message"></div>
+        <button id="notice-ok">OK</button>
+      </div>
+    </div>
+
+    <div id="password-overlay" class="hidden">
+      <div id="password-popup">
+        <div id="password-title">Введите пароль</div>
+        <div id="password-error" class="hidden"></div>
+        <input type="text" id="password-prompt-input" placeholder="Пароль" maxlength="20" autocomplete="off" />
+        <div style="display:flex;gap:8px;">
+          <button id="password-prompt-ok">Войти</button>
+          <button id="password-prompt-cancel" class="btn-secondary">Отмена</button>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="game-canvas" class="hidden"></canvas>
+
+    <div id="hud" class="hidden">
+      <div id="scoreboard"></div>
+      <div id="serve-indicator" class="hidden"></div>
+      <div id="connection-status"></div>
+      <button id="btn-exit-game">Выйти из игры</button>
+    </div>
+
+    <div id="rules-overlay" class="hidden">
+      <div id="rules-popup">
+        <button id="rules-close">&times;</button>
+        <h2>Как играть в падел</h2>
+
+        <div class="rules-section">
+          <h3>Правила падела</h3>
+          <p>Мяч может отскакивать от стеклянных стен и оставаться в игре &mdash; это ключ к стратегии падела!</p>
+          <p>Мяч должен сначала ударить площадку на стороне соперника, прежде чем тот сможет его отбить. Два отскока = потеря очка.</p>
+          <p>Игроки остаются на своей половине площадки.</p>
+        </div>
+
+        <div class="rules-section">
+          <h3>Движение</h3>
+          <div class="rules-keys">
+            <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> или <kbd>&uarr;</kbd><kbd>&larr;</kbd><kbd>&darr;</kbd><kbd>&rarr;</kbd> &mdash; Движение
+          </div>
+          <div class="rules-keys">
+            <kbd>Shift</kbd> &mdash; Спринт (тратит выносливость)
+          </div>
+        </div>
+
+        <div class="rules-section">
+          <h3>Подача</h3>
+          <p>Нажмите <kbd>Пробел</kbd>, чтобы подбросить мяч, затем <kbd>Пробел</kbd> снова, чтобы ударить.</p>
+          <p>Следите за шкалой силы &mdash; бейте в зелёной зоне для максимальной силы. Подача должна попасть в выделенный квадрат по диагонали.</p>
+          <p>Два фола = двойной фол, очко сопернику.</p>
+        </div>
+
+        <div class="rules-section">
+          <h3>Удары</h3>
+          <p>Двигайтесь во время удара, чтобы направить мяч. Стрелка прицела показывает направление удара.</p>
+          <p>Двигайтесь назад + <kbd>Пробел</kbd>, чтобы ударить в свою стенку &mdash; мяч отскочит обратно через сетку!</p>
+        </div>
+
+        <div class="rules-section">
+          <h3>Счёт</h3>
+          <p>Очки: 0 &rarr; 15 &rarr; 30 &rarr; 40 &rarr; Гейм</p>
+          <p>При 40-40 — Ровно: нужно выиграть два мяча подряд. Первый даёт Преимущество, второй — Гейм.</p>
+          <p>Выиграйте 6 геймов, чтобы взять сет (с перевесом в 2, тайбрейк при 6-6).</p>
+          <p>Выиграйте нужное количество сетов, чтобы выиграть матч.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="chat-container" class="hidden">
+      <div id="chat-messages"></div>
+      <div id="chat-input-row">
+        <input type="text" id="chat-input" placeholder="Введите сообщение..." maxlength="200" autocomplete="off" />
+        <button id="chat-send">Отправить</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/client/js/main.js?v=2"></script>
+</body>
+</html>

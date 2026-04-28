@@ -1,0 +1,27 @@
+.cart-title {
+  margin-bottom: 28px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.empty-btn {
+  max-width: 200px;
+  margin-top: 24px;
+}
+
+.remove-btn {
+  width: auto;
+  padding: 10px 18px;
+  background: rgba(244, 67, 54, 0.9);
+  color: #ffffff;
+}
+
+.remove-btn:hover {
+  background: rgba(244, 67, 54, 1);
+}
+
+.checkout-btn {
+  margin-top: 24px;
+}

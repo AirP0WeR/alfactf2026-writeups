@@ -1,0 +1,32 @@
+{
+  "name": "chococore",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "check:fix": "biome check --write ."
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-loader-spinner": "^8.0.2",
+    "uuid": "^11.0.4"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.11",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/uuid": "^10",
+    "typescript": "^6"
+  }
+}

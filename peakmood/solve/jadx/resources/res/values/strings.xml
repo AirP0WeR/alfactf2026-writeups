@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PeakMood</string>
+    <string name="brand_name">PeakMood</string>
+    <string name="subtitle_world">Забирайся выше - получай более редкие награды</string>
+    <string name="subtitle_encounter">Камера для ближнего захвата</string>
+    <string name="base_url">https://peakmood-ou1mhzjv.alfactf.ru</string>
+    <string name="status_idle">Готово к полевому наблюдению</string>
+    <string name="coords_idle">Ожидаю геопозицию устройства.</string>
+    <string name="details_world_idle">Карта показывает ближайшие сигналы и обновляется автоматически, когда ты меняешь позицию.</string>
+    <string name="node_glyph">◈</string>
+    <string name="node_idle">Нет активной находки</string>
+    <string name="scan_pulse">ПОИСК</string>
+    <string name="button_resume_encounter">Открыть жеоду</string>
+    <string name="button_leave_encounter">К карте</string>
+    <string name="loot_title">Последняя находка</string>
+    <string name="loot_empty">Новые находки появятся здесь после успешного скана.</string>
+    <string name="loot_signature_label">Архивная сигнатура</string>
+    <string name="map_label">КАРТА</string>
+    <string name="map_meta_idle">Жду геопозицию</string>
+    <string name="encounter_idle_status">Обзор готов</string>
+    <string name="encounter_idle_details">Когда на карте появится активная находка, открой обзор и тапай по геоде, чтобы снять защитный слой.</string>
+    <string name="permission_needed">Нужен доступ к геолокации, чтобы обновлять сектор рядом.</string>
+    <string name="waiting_location">Обновляю геопозицию…</string>
+    <string name="location_missing">Текущая геопозиция недоступна. Проверь настройки устройства и попробуй ещё раз.</string>
+    <string name="camera_permission_needed">Нужен доступ к камере для обзора.</string>
+    <string name="camera_unavailable">Обзор недоступен без доступа к камере.</string>
+    <string name="service_unavailable">Сервис временно недоступен. Попробуй ещё раз.</string>
+    <string name="connection_alert_title">Нет связи с сервисом</string>
+    <string name="connection_alert_message">Не удалось подключиться к полевой сети. Попробовать снова?</string>
+    <string name="connection_retry">Попробовать снова</string>
+    <string name="connection_retry_later">Позже</string>
+</resources>

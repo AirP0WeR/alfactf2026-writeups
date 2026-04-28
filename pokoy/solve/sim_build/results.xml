@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1777109557" />
+    <testcase name="batch" classname="batch" file="/work/batch.py" lineno="81" time="2.0724971294403076" sim_time_ns="79548.0" ratio_time="38382.68283704812" />
+  </testsuite>
+</testsuites>

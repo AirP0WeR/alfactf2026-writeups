@@ -1,0 +1,184 @@
+#!/usr/bin/env python3
+"""T5: Verify key schedule consistency.
+
+We have round-key bytes for each round 1..9 (16 bytes each) and final round 10
+(16 bytes). The challenge: figure out the byte permutation (ShiftRows mapping)
+to put the bytes in canonical AES order.
+
+Plan:
+- The k_in extracted is the byte that's XOR'd with the input to T_b in round r.
+- In standard T-table AES, the input byte at position p in round r's T-table
+  comes from a previous-round state byte chosen by ShiftRows.
+- The k_in is literally the round key byte for that input position.
+
+If we order the 16 k_in values as the round key (with appropriate inverse permutation
+applied so they match canonical AES K_r), then K_r should be derivable from K_(r-1)
+via AES key expansion.
+
+Approach: try all 24 permutations? No, the permutation is fixed by AES ShiftRows.
+Just need to know which of 16 'positions' corresponds to which (row, col) in the state.
+
+Actually simpler: try ANY ordering of 16 bytes per round and check if K_r expands
+to K_(r+1) via AES KeyExpansion. We have 9 round keys; if we hypothesize an ordering
+that's consistent we can verify.
+
+Alternative: the 16 k_in per round ARE 16 distinct bytes; if ordered correctly they form K_r.
+"""
+import json
+from pathlib import Path
+from itertools import permutations
+
+DATA = json.loads(Path('/Users/airp0wer/Projects/alfa-ctf-2026/tasks-2026/pokoy/solve/aes_data.json').read_text())
+ttables = DATA['ttables']
+sboxes = DATA['sboxes']
+
+AES_SBOX = [
+    0x63,0x7c,0x77,0x7b,0xf2,0x6b,0x6f,0xc5,0x30,0x01,0x67,0x2b,0xfe,0xd7,0xab,0x76,
+    0xca,0x82,0xc9,0x7d,0xfa,0x59,0x47,0xf0,0xad,0xd4,0xa2,0xaf,0x9c,0xa4,0x72,0xc0,
+    0xb7,0xfd,0x93,0x26,0x36,0x3f,0xf7,0xcc,0x34,0xa5,0xe5,0xf1,0x71,0xd8,0x31,0x15,
+    0x04,0xc7,0x23,0xc3,0x18,0x96,0x05,0x9a,0x07,0x12,0x80,0xe2,0xeb,0x27,0xb2,0x75,
+    0x09,0x83,0x2c,0x1a,0x1b,0x6e,0x5a,0xa0,0x52,0x3b,0xd6,0xb3,0x29,0xe3,0x2f,0x84,
+    0x53,0xd1,0x00,0xed,0x20,0xfc,0xb1,0x5b,0x6a,0xcb,0xbe,0x39,0x4a,0x4c,0x58,0xcf,
+    0xd0,0xef,0xaa,0xfb,0x43,0x4d,0x33,0x85,0x45,0xf9,0x02,0x7f,0x50,0x3c,0x9f,0xa8,
+    0x51,0xa3,0x40,0x8f,0x92,0x9d,0x38,0xf5,0xbc,0xb6,0xda,0x21,0x10,0xff,0xf3,0xd2,
+    0xcd,0x0c,0x13,0xec,0x5f,0x97,0x44,0x17,0xc4,0xa7,0x7e,0x3d,0x64,0x5d,0x19,0x73,
+    0x60,0x81,0x4f,0xdc,0x22,0x2a,0x90,0x88,0x46,0xee,0xb8,0x14,0xde,0x5e,0x0b,0xdb,
+    0xe0,0x32,0x3a,0x0a,0x49,0x06,0x24,0x5c,0xc2,0xd3,0xac,0x62,0x91,0x95,0xe4,0x79,
+    0xe7,0xc8,0x37,0x6d,0x8d,0xd5,0x4e,0xa9,0x6c,0x56,0xf4,0xea,0x65,0x7a,0xae,0x08,
+    0xba,0x78,0x25,0x2e,0x1c,0xa6,0xb4,0xc6,0xe8,0xdd,0x74,0x1f,0x4b,0xbd,0x8b,0x8a,
+    0x70,0x3e,0xb5,0x66,0x48,0x03,0xf6,0x0e,0x61,0x35,0x57,0xb9,0x86,0xc1,0x1d,0x9e,
+    0xe1,0xf8,0x98,0x11,0x69,0xd9,0x8e,0x94,0x9b,0x1e,0x87,0xe9,0xce,0x55,0x28,0xdf,
+    0x8c,0xa1,0x89,0x0d,0xbf,0xe6,0x42,0x68,0x41,0x99,0x2d,0x0f,0xb0,0x54,0xbb,0x16,
+]
+
+RCON = [0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80,0x1b,0x36]
+
+def xtime(b):
+    return ((b << 1) ^ (0x1b if b & 0x80 else 0)) & 0xff
+def gmul(a, b):
+    r = 0
+    for i in range(8):
+        if b & 1: r ^= a
+        a = xtime(a); b >>= 1
+    return r & 0xff
+def build_T():
+    T = [[0]*256 for _ in range(4)]
+    for x in range(256):
+        s = AES_SBOX[x]
+        m2 = gmul(s, 2); m3 = gmul(s, 3)
+        T[0][x] = (m2 << 24) | (s << 16) | (s << 8) | m3
+        T[1][x] = (m3 << 24) | (m2 << 16) | (s << 8) | s
+        T[2][x] = (s << 24) | (m3 << 16) | (m2 << 8) | s
+        T[3][x] = (s << 24) | (s << 16) | (m3 << 8) | m2
+    return T
+T_AES = build_T()
+
+# Recover (tb, k_in, mask) for all 144 ttables
+tt_info = []
+for ti, t in enumerate(ttables):
+    for tb in range(4):
+        for k_in in range(256):
+            mask = t[0] ^ T_AES[tb][0 ^ k_in]
+            ok = all(t[x] == (T_AES[tb][x ^ k_in] ^ mask) for x in range(256))
+            if ok:
+                tt_info.append((tb, k_in, mask))
+                break
+        else:
+            continue
+        break
+
+# Recover (k_in, k_out) for final sboxes
+sbox_info = []
+for s in sboxes:
+    for k_in in range(256):
+        k_out = s[0] ^ AES_SBOX[k_in]
+        if all(s[x] == AES_SBOX[x ^ k_in] ^ k_out for x in range(256)):
+            sbox_info.append((k_in, k_out))
+            break
+
+# Per-round k_in (16 bytes) and final
+round_keys_kin = [[tt_info[r*16 + p][1] for p in range(16)] for r in range(9)]
+round10_kin = [sbox_info[i][0] for i in range(16)]
+
+print("Round-key candidates (raw, position-ordered):")
+for r, k in enumerate(round_keys_kin):
+    print(f"K_in_round_{r+1}: {' '.join(f'{b:02x}' for b in k)}")
+print(f"K_in_round_10:  {' '.join(f'{b:02x}' for b in round10_kin)}")
+
+def aes_key_expand(key16):
+    """Expand 16-byte key to 11 round keys (each 16 bytes)."""
+    W = list(key16)
+    for i in range(4, 44):
+        t = W[(i-1)*4:i*4]
+        if i % 4 == 0:
+            t = [AES_SBOX[t[1]]^RCON[i//4 - 1], AES_SBOX[t[2]], AES_SBOX[t[3]], AES_SBOX[t[0]]]
+        prev = W[(i-4)*4:(i-4)*4+4]
+        for j in range(4):
+            W.append(prev[j] ^ t[j])
+    return [W[i*16:(i+1)*16] for i in range(11)]
+
+# Hypothesis: round_keys_kin[0] (the round 1 input k_in) == K0 in some byte ordering.
+# Standard T-table layout: input to round 1 T_b at position p is state[p] (after initial ARK with K0).
+# But ShiftRows acts on the state inputs. Specifically:
+#   For column c output (positions 4c..4c+3 of the round output), the inputs are:
+#   state[4c], state[4(c+1)+1 mod 16-row1], state[4(c+2)+2 mod 16-row2], state[4(c+3)+3 mod 16-row3]
+# Hmm, actually the inputs sweep the rotated state. Let's just enumerate.
+#
+# State indexed as col*4 + row (column-major 4x4).
+# After ShiftRows: row r is rotated left by r positions (in row indexing).
+#   new_state[col*4 + row] = state[((col + row) mod 4)*4 + row]
+# T-table lookup at output (col, row): input is state[((col + row) mod 4)*4 + row].
+# So in T-table impl with positions p = col*4+row (output position):
+#   T_b at position p uses input state byte (((p>>2) + (p&3)) mod 4)*4 + (p&3).
+
+# Round 1 input state bytes are pt_byte XOR K0_byte (initial ARK). So
+#   k_in[p] = K0[((p>>2 + p&3) mod 4)*4 + (p&3)]
+# i.e. K0 indexed by ShiftRows-ed position.
+
+# Build the inverse map: given output position p, what is the K0 source position?
+def shift_rows_input(p):
+    col = p >> 2
+    row = p & 3
+    src_col = (col + row) & 3
+    return src_col*4 + row
+
+# Try: K0 = inverse permutation applied to round_keys_kin[0]
+def unshift(k_in_list):
+    K = [0]*16
+    for p in range(16):
+        K[shift_rows_input(p)] = k_in_list[p]
+    return K
+
+K0_candidate = unshift(round_keys_kin[0])
+print(f"\nK0 candidate: {' '.join(f'{b:02x}' for b in K0_candidate)}")
+
+# Also try DIRECT (no ShiftRows) interpretation
+K0_direct = round_keys_kin[0][:]
+print(f"K0 direct:    {' '.join(f'{b:02x}' for b in K0_direct)}")
+
+# Expand both and compare
+for label, K0 in [('shifted', K0_candidate), ('direct', K0_direct)]:
+    expanded = aes_key_expand(K0)
+    print(f"\n--- Expanding {label} K0 ---")
+    print(f"K0  expanded: {' '.join(f'{b:02x}' for b in expanded[0])}")
+    for r in range(1, 10):
+        # Compare expanded[r] with round_keys_kin[r-1] in same and shifted forms
+        rk_kin_pos = round_keys_kin[r-1] if r-1 < 9 else None
+        if rk_kin_pos is None: continue
+        # Wait — round_keys_kin[r-1] is k_in for round r (r=1..9). Round r consumes K_(r-1)? or K_r?
+        # In T-table impl, round r's T-table input is post-ARK with K_(r-1). So k_in for round r = K_(r-1).
+        # round_keys_kin index 0 corresponds to round 1 -> K_0.
+        # round_keys_kin[r-1] -> K_(r-1).
+        # So round_keys_kin[r] -> K_r. Compare to expanded[r].
+        if r >= 9: continue
+    # Compare expanded[r] vs round_keys_kin[r] (which is K_r ARK)
+    for r in range(9):
+        rkk = round_keys_kin[r]
+        # the round_keys_kin[r] is the round key INPUT to round r+1 in T-table form, i.e. K_r in shifted layout
+        if label == 'shifted':
+            # interpret round_keys_kin[r] using shift_rows_input map
+            K_actual = unshift(rkk)
+        else:
+            K_actual = rkk[:]
+        match = K_actual == expanded[r]
+        print(f"  Round {r}: match={match}")

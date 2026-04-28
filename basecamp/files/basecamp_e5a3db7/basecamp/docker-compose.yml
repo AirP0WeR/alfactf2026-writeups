@@ -1,0 +1,10 @@
+services:
+    basecamp:
+        build: .
+        environment:
+            - JWT_SECRET=1111111111111111111111111111111111111111111111111111111111111111
+            - SLUG_SECRET=2222222222222222222222222222222222222222222222222222222222222222
+        ports:
+            - "8080:80"
+        restart: unless-stopped
+        stop_grace_period: 0s

@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks: [padelnet]
+
+  game-1:
+    build: .
+    environment:
+      NODE_ID: game-1
+      REDIS_URL: redis://redis:6379
+      PORT: "3000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [padelnet]
+
+  game-2:
+    build: .
+    environment:
+      NODE_ID: game-2
+      REDIS_URL: redis://redis:6379
+      PORT: "3000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [padelnet]
+
+  game-3:
+    build: .
+    environment:
+      NODE_ID: game-3
+      REDIS_URL: redis://redis:6379
+      PORT: "3000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks: [padelnet]
+
+  nginx:
+    image: nginx:1.27-alpine
+    depends_on:
+      - game-1
+      - game-2
+      - game-3
+    ports:
+      - "20005:80"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./client:/usr/share/nginx/html/client:ro
+      - ./shared:/usr/share/nginx/html/shared:ro
+    restart: unless-stopped
+    networks: [padelnet]
+
+networks:
+  padelnet:
+    driver: bridge

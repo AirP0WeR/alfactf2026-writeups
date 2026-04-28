@@ -1,0 +1,17 @@
+.balance-title {
+  margin-bottom: 28px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.promo-description {
+  margin-bottom: 18px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.activate-btn {
+  width: auto;
+}
