@@ -1,0 +1,107 @@
+
+========== ATTEMPT 1/3 (seed=42) ==========
+
+[game 1] start: {'attempts_left': 46, 'total_attempts': 46}
+  [probe 1] n=1000000 centre=(-4.883021,4.626975) r=10004247.061m centroid=(3.169110,-55.819161) diam≈39979912.829m attempts_left=46
+    ↳ found=True kept=500000
+  [probe 2] n=500000 centre=(-83.984189,-72.013732) r=9565236.796m centroid=(-4.873018,4.498581) diam≈20036845.949m attempts_left=45
+    ↳ found=False kept=250000
+  [probe 3] n=250000 centre=(22.268081,-64.999756) r=7487213.458m centroid=(40.362715,10.051748) diam≈20619346.965m attempts_left=44
+    ↳ found=True kept=125000
+  [probe 4] n=125000 centre=(79.087837,15.916661) r=5955728.581m centroid=(35.799341,-35.729861) diam≈12620956.249m attempts_left=43
+    ↳ found=True kept=62500
+  [probe 5] n=62500 centre=(35.217115,5.830965) r=3728706.202m centroid=(53.143203,-27.561436) diam≈8684158.662m attempts_left=42
+    ↳ found=False kept=31250
+  [probe 6] n=31250 centre=(60.348544,-54.487879) r=1771345.278m centroid=(56.995333,-51.343309) diam≈7172366.075m attempts_left=41
+    ↳ found=False kept=15625
+    ↳ resampled (bootstrap+jitter) to n=1000000
+  [probe 7] n=1000000 centre=(78.329039,-34.816399) r=4116661.706m centroid=(53.236185,-50.181488) diam≈7839498.800m attempts_left=40
+    ↳ found=True kept=500000
+  [probe 8] n=500000 centre=(43.742747,-49.610041) r=3813399.615m centroid=(67.804368,-39.028592) diam≈6822500.537m attempts_left=39
+    ↳ found=True kept=250000
+  [probe 9] n=250000 centre=(72.262974,-18.593837) r=3552649.718m centroid=(54.264365,-51.128419) diam≈5778414.473m attempts_left=38
+    ↳ found=False kept=125000
+  [probe 10] n=125000 centre=(43.409705,-48.784935) r=1148919.136m centroid=(45.139642,-61.951348) diam≈4171039.671m attempts_left=37
+    ↳ found=False kept=62500
+  [probe 11] n=62500 centre=(50.064109,-79.116132) r=695260.700m centroid=(46.240320,-71.826945) diam≈1632942.559m attempts_left=36
+    ↳ found=True kept=31250
+  [probe 12] n=31250 centre=(49.756582,-76.983108) r=354871.777m centroid=(47.381925,-75.918857) diam≈1093941.436m attempts_left=35
+    ↳ found=False kept=15625
+    ↳ resampled (bootstrap+jitter) to n=1000000
+  [probe 13] n=1000000 centre=(46.565273,-71.517963) r=262812.009m centroid=(46.202323,-74.999426) diam≈837154.579m attempts_left=34
+    ↳ found=True kept=500000
+  [probe 14] n=500000 centre=(47.456005,-71.473261) r=177242.876m centroid=(46.552300,-73.128398) diam≈437699.983m attempts_left=33
+    ↳ found=True kept=250000
+  [probe 15] n=250000 centre=(46.509581,-72.377074) r=82657.981m centroid=(47.031342,-72.387908) diam≈292771.748m attempts_left=32
+    ↳ found=False kept=125000
+  [probe 16] n=125000 centre=(47.304896,-70.824951) r=128782.016m centroid=(47.416445,-72.357279) diam≈274838.571m attempts_left=31
+    ↳ found=False kept=62500
+  [probe 17] n=62500 centre=(47.998099,-72.512545) r=81563.151m centroid=(47.431532,-73.077757) diam≈204048.931m attempts_left=30
+    ↳ found=True kept=31250
+  [probe 18] n=31250 centre=(48.197542,-72.684063) r=61126.959m centroid=(47.707907,-72.777249) diam≈133458.441m attempts_left=29
+    ↳ found=False kept=15625
+    ↳ resampled (bootstrap+jitter) to n=1000000
+  [probe 19] n=1000000 centre=(47.584862,-73.142106) r=23732.794m centroid=(47.506225,-72.900531) diam≈80977.788m attempts_left=28
+    ↳ found=False kept=500000
+  [probe 20] n=500000 centre=(47.394126,-72.937128) r=21028.557m centroid=(47.455323,-72.722641) diam≈62650.283m attempts_left=27
+    ↳ found=False kept=250000
+  [probe 21] n=250000 centre=(47.322962,-72.619071) r=22871.802m centroid=(47.500351,-72.637236) diam≈54652.471m attempts_left=26
+    ↳ found=False kept=125000
+  [probe 22] n=125000 centre=(47.579456,-72.803256) r=10594.474m centroid=(47.587310,-72.665600) diam≈36908.197m attempts_left=25
+    ↳ found=False kept=62500
+  [probe 23] n=62500 centre=(47.528546,-72.601763) r=7493.147m centroid=(47.586366,-72.585690) diam≈27315.425m attempts_left=24
+    ↳ found=False kept=31250
+  [probe 24] n=31250 centre=(47.632266,-72.674992) r=8039.926m centroid=(47.617410,-72.574934) diam≈21805.332m attempts_left=23
+    ↳ found=False kept=15625
+    ↳ resampled (bootstrap+jitter) to n=1000000
+  [probe 25] n=1000000 centre=(47.620333,-72.544835) r=3318.227m centroid=(47.616059,-72.520238) diam≈17989.784m attempts_left=22
+    ↳ found=False kept=500000
+  [probe 26] n=500000 centre=(47.659617,-72.507875) r=5662.007m centroid=(47.613359,-72.503765) diam≈17189.094m attempts_left=21
+    ↳ found=True kept=250000
+  [probe 27] n=250000 centre=(47.617313,-72.481620) r=3183.705m centroid=(47.640514,-72.496635) diam≈11610.792m attempts_left=20
+    ↳ found=True kept=125000
+  [probe 28] n=125000 centre=(47.609727,-72.498645) r=2421.692m centroid=(47.628533,-72.488530) diam≈4959.316m attempts_left=19
+    ↳ found=False kept=62500
+  [probe 29] n=62500 centre=(47.638959,-72.509154) r=1794.458m centroid=(47.636881,-72.486596) diam≈3837.931m attempts_left=18
+    ↳ found=False kept=31250
+  [probe 30] n=31250 centre=(47.623582,-72.472264) r=1515.084m centroid=(47.636149,-72.477026) diam≈3113.567m attempts_left=17
+    ↳ found=True kept=15625
+    ↳ resampled (bootstrap+jitter) to n=1000000
+  [probe 31] n=1000000 centre=(47.636485,-72.474809) r=676.847m centroid=(47.631537,-72.476721) diam≈2112.717m attempts_left=16
+    ↳ found=True kept=500000
+  [probe 32] n=500000 centre=(47.634271,-72.470046) r=459.354m centroid=(47.633646,-72.475303) diam≈1470.792m attempts_left=15
+    ↳ found=False kept=250000
+  [probe 33] n=250000 centre=(47.632411,-72.480323) r=271.652m centroid=(47.633353,-72.478372) diam≈1044.481m attempts_left=14
+    ↳ found=True kept=125000
+  [probe 34] n=125000 centre=(47.634563,-72.482018) r=287.768m centroid=(47.632928,-72.479407) diam≈596.434m attempts_left=13
+    ↳ found=False kept=62500
+  [probe 35] n=62500 centre=(47.631585,-72.477695) r=123.300m centroid=(47.632267,-72.478303) diam≈466.947m attempts_left=12
+    ↳ found=False kept=31250
+  [probe 36] n=31250 centre=(47.632093,-72.480384) r=180.604m centroid=(47.632759,-72.478598) diam≈393.326m attempts_left=11
+    ↳ found=False kept=15625
+    ↳ resampled (bootstrap+jitter) to n=1000000
+  [probe 37] n=1000000 centre=(47.634082,-72.477774) r=94.919m centroid=(47.633308,-72.477711) diam≈249.033m attempts_left=10
+    ↳ found=True kept=500000
+  [probe 38] n=500000 centre=(47.634045,-72.477783) r=58.584m centroid=(47.633611,-72.477822) diam≈179.585m attempts_left=9
+    ↳ found=True kept=250000
+  [probe 39] n=250000 centre=(47.633658,-72.477809) r=27.071m centroid=(47.633804,-72.477855) diam≈137.443m attempts_left=8
+    ↳ found=False kept=125000
+  [probe 40] n=125000 centre=(47.633727,-72.477394) r=54.759m centroid=(47.633918,-72.477901) diam≈114.744m attempts_left=7
+    ↳ found=False kept=62500
+  [probe 41] n=62500 centre=(47.634325,-72.478175) r=40.920m centroid=(47.633956,-72.478144) diam≈94.920m attempts_left=6
+    ↳ found=True kept=31250
+  [probe 42] n=31250 centre=(47.634267,-72.478146) r=21.480m centroid=(47.634118,-72.478068) diam≈60.993m attempts_left=5
+    ↳ found=False kept=15625
+    ↳ resampled (bootstrap+jitter) to n=1000000
+  [probe 43] n=1000000 centre=(47.634031,-72.478221) r=11.139m centroid=(47.634043,-72.478070) diam≈50.079m attempts_left=4
+    ↳ found=False kept=500000
+  [probe 44] n=500000 centre=(47.634115,-72.477881) r=10.709m centroid=(47.634069,-72.477978) diam≈35.098m attempts_left=3
+    ↳ found=False kept=250000
+  [probe 45] n=250000 centre=(47.633997,-72.478078) r=5.364m centroid=(47.634026,-72.478040) diam≈19.094m attempts_left=2
+    ↳ found=True kept=125000
+  [final] attempts_left=1, centroid=(47.634001,-72.478053)
+[game 1] guessing at (47.6340008, -72.4780531)
+[game 1] guess result: ok=True flag=alfa{wIsh_I_hAd_TH4t_anT3NNA_FOR_MY_7V_rEM07E}
+
+*** FLAG: alfa{wIsh_I_hAd_TH4t_anT3NNA_FOR_MY_7V_rEM07E} ***
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="ru"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Низкополигональный раннер с котом, рюкзаком и очень длинной дорогой.">
+    <title>Альфа Раннер</title>
+    <style>
+      .boot-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        background: #dce9ef;
+        color: #18201d;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        opacity: 1;
+        transition: opacity 220ms ease;
+      }
+
+      .boot-loader--hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .boot-loader__box {
+        min-width: min(76vw, 320px);
+        padding: 22px 24px;
+        border: 1px solid rgba(24, 32, 29, 0.16);
+        border-radius: 8px;
+        background: rgba(252, 253, 247, 0.9);
+        text-align: center;
+        box-shadow: 0 18px 42px rgba(64, 80, 75, 0.14);
+      }
+
+      .boot-loader__title {
+        margin: 0 0 12px;
+        font-size: 1.18rem;
+        font-weight: 900;
+      }
+
+      .boot-loader__bar {
+        position: relative;
+        height: 8px;
+        overflow: hidden;
+        border-radius: 8px;
+        background: rgba(24, 32, 29, 0.12);
+      }
+
+      .boot-loader__bar::after {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 42%;
+        border-radius: inherit;
+        background: #a73d45;
+        animation: boot-loader-slide 1.05s ease-in-out infinite;
+      }
+
+      @keyframes boot-loader-slide {
+        0% {
+          transform: translateX(-110%);
+        }
+
+        100% {
+          transform: translateX(260%);
+        }
+      }
+    </style>
+    <script type="module" crossorigin="" src="/assets/index-yflPIC15.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/assets/index-BREGg8EB.css">
+  </head>
+  <body>
+    
+    <script>
+      (() => {
+        const timer = window.setInterval(() => {
+          const loader = document.getElementById("boot-loader");
+          if (!loader) {
+            window.clearInterval(timer);
+            return;
+          }
+
+          const mp3Count = performance
+            .getEntriesByType("resource")
+            .filter((entry) => entry.name.includes(".mp3")).length;
+          if (document.querySelector("canvas") && mp3Count >= 2) {
+            loader.classList.add("boot-loader--hidden");
+            window.clearInterval(timer);
+            window.setTimeout(() => loader.remove(), 260);
+          }
+        }, 80);
+      })();
+    </script>
+    <div id="root"><main class="game-page "><div class="stage"><div class="stage-canvas"><canvas data-engine="three.js r183" width="1280" height="720" style="display: block;"></canvas></div></div><button class="stage-hint" type="button">Нажмите, чтобы играть</button><div class="hud-top"><div><p class="eyebrow">Счёт</p><strong>0/1000</strong></div><div><p class="eyebrow">Цель</p><strong>0%</strong></div></div><aside class="cheat-panel "><p class="eyebrow">Чит-коды</p><div class="cheat-copy-stack"><canvas class="cheat-copy-canvas" aria-hidden="true" width="342" height="102" style="filter: blur(9px);"></canvas></div><span class="cheat-cover" style="background: rgba(24, 32, 29, 0.22); color: rgb(255, 255, 255);">Осталось камней: 500</span></aside></main></div>
+  
+
+</body></html>

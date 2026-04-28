@@ -93,5 +93,5 @@ bash tasks-2026/plusviber/solve/exploit.sh
 
 ## Artifacts
 
-- `artifacts/admin-note.json` — оригинальный ответ с заметкой администратора (содержит секрет; gitignored)
-- `artifacts/app.js`, `artifacts/index.html` — клиентская часть приложения (gitignored)
+- `artifacts/admin-note.json` — оригинальный ответ с заметкой администратора (содержит secret-параметр)
+- `artifacts/app.js`, `artifacts/index.html` — клиентская часть приложения
