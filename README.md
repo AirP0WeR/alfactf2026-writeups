@@ -4,7 +4,7 @@
 
 ![CTF Badge](https://img.shields.io/badge/CTF-Alfa%20CTF%202026-blue?style=for-the-badge)
 ![Team](https://img.shields.io/badge/Команда-The%20A--Team-orange?style=for-the-badge)
-![Solved](https://img.shields.io/badge/Решено-19%20задач-green?style=for-the-badge)
+![Solved](https://img.shields.io/badge/Решено-20%20задач-green?style=for-the-badge)
 
 **Официальные райтапы от команды The A-Team**
 
@@ -15,7 +15,7 @@
 - **🗓️ Дата:** 25 апреля 2026 г. (9:00–21:00 МСК, 12 часов)
 - **🌐 Платформа:** [alfactf.ru](https://alfactf.ru)
 - **👥 Команда:** aip0wer, lexusyamba, Mamut, Mintoren
-- **🎯 Трек:** CTF (соревновательный)
+- **🎯 Трек:** ИТ
 
 ---
 
@@ -204,6 +204,15 @@
 <td>FPGA Verilog: T9 brute-force под trigger-условие OLED</td>
 </tr>
 
+<tr>
+<td>20</td>
+<td><kbd>WEB</kbd></td>
+<td><a href="noonechilled/"><strong>noonechilled</strong></a><br><small>Никто, конечно, не чиллил</small></td>
+
+<td>🟡 Средняя</td>
+<td>Web Cache Deception через SSRF в авто-логиненном боте</td>
+</tr>
+
 </tbody>
 </table>
 
@@ -224,7 +233,6 @@
 ## 🔗 Ссылки
 
 - **Соревнование:** [alfactf.ru](https://alfactf.ru/)
-- **Страница на CTFtime:** [CTFtime Event](https://ctftime.org/event/2486)
 - **Команда The A-Team:**
 - **Контакт:** [GitHub @airp0wer](https://github.com/airp0wer) · [Telegram @aip0wer](https://t.me/aip0wer)
 

