@@ -4,7 +4,7 @@
 
 ![CTF Badge](https://img.shields.io/badge/CTF-Alfa%20CTF%202026-blue?style=for-the-badge)
 ![Team](https://img.shields.io/badge/Команда-The%20A--Team-orange?style=for-the-badge)
-![Solved](https://img.shields.io/badge/Решено-20%20задач-green?style=for-the-badge)
+![Solved](https://img.shields.io/badge/Решено-22%20задачи-green?style=for-the-badge)
 
 **Официальные райтапы от команды The A-Team**
 
@@ -211,6 +211,24 @@
 
 <td>🟡 Средняя</td>
 <td>Web Cache Deception через SSRF в авто-логиненном боте</td>
+</tr>
+
+<tr>
+<td>21</td>
+<td><kbd>WEB</kbd></td>
+<td><a href="gyropizza/"><strong>gyropizza</strong></a><br><small>Гиростабилизированная пицца</small></td>
+
+<td>🔴 Сложная</td>
+<td>Clientside: docker-alias + Set-Cookie до CSRF + iframe-CORS обход</td>
+</tr>
+
+<tr>
+<td>22</td>
+<td><kbd>MOBILE</kbd></td>
+<td><a href="maximum/"><strong>maximum</strong></a><br><small>МАКСИМУМ</small></td>
+
+<td>🟡 Средняя</td>
+<td>Android: FCM-канал + IDOR в групповом чате (post-event)</td>
 </tr>
 
 </tbody>
